@@ -5,6 +5,19 @@
  */
 package Frames;
 
+import Auxiliar.DBConnection;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
@@ -16,16 +29,28 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     /**
      * Creates new form FrameConfiguracio
      */
-    public FrameConfiguracio() {
+    public FrameConfiguracio() throws IOException {
         initComponents();
-        carregarGUI();
+        carregarGUI();       
     }
     
-    private void carregarGUI() {
+    private void carregarGUI() throws IOException {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        /** CARREGAR DADES CONFIG */
+        try{
+            BufferedReader saveFile= new BufferedReader(new FileReader("config/conf.txt"));
+            hostField.setText(saveFile.readLine()); 
+            databaseField.setText(saveFile.readLine());
+            userField.setText(saveFile.readLine());
+            passwordField.setText("Fuiste altamente troliadoxdxd");
+            saveFile.close();
+        }catch (FileNotFoundException e){
+            System.out.println ("Error al carregar la configuració: " + e);
+        }
+        
     }
 
     /**
@@ -48,6 +73,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         submitBtn = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
+        provarConnexioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Univeylandia Parc - Configuració");
@@ -71,6 +97,18 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         });
 
         submitBtn.setText("Acceptar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
+
+        provarConnexioButton.setText("Provar connexió");
+        provarConnexioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                provarConnexioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,18 +129,23 @@ public class FrameConfiguracio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(0, 234, Short.MAX_VALUE)))
+                        .addGap(0, 299, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(provarConnexioButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(provarConnexioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -119,7 +162,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backBtn)
                     .addComponent(submitBtn))
@@ -135,6 +178,42 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         fi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        new File("config").mkdirs();
+        try{
+            FileWriter saveFile = new FileWriter("config/conf.txt");
+            saveFile.write(hostField.getText() + "\n");
+            saveFile.write(databaseField.getText() + "\n");
+            saveFile.write(userField.getText() + "\n");
+            saveFile.write(passwordField.getText() + "\n");
+            saveFile.close();
+            JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
+         }catch (Exception e){
+            System.out.println("Error: " + e);
+            JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);
+         } 
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void provarConnexioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provarConnexioButtonActionPerformed
+        try{
+            Statement statement = null;
+            ResultSet resultSet = null;
+            DBConnection connexio = new DBConnection();
+            statement = connexio.getConnection().createStatement();
+            resultSet = statement.executeQuery("select * from users limit 1");
+            resultSet.first();
+            if (resultSet.getString("email") != null){
+                //System.out.println(resultSet.getString("email"));
+                JOptionPane.showMessageDialog(this, "Connexió correcta");
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al realitzar la connexió");
+            }
+            connexio.disconnect();
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);
+        }
+    }//GEN-LAST:event_provarConnexioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,7 +245,11 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameConfiguracio().setVisible(true);
+                try {
+                    new FrameConfiguracio().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrameConfiguracio.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -181,6 +264,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton provarConnexioButton;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
