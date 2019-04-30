@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;                                                                       // Import per el SQL Connection
 import java.sql.DriverManager;                                                                    // Import per el SQL Drive Manager
+import Frames.FrameConfiguracio;
 
 
 public class DBConnection {
@@ -34,8 +35,8 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    private static String [] carregarConf() throws Exception{
-        BufferedReader saveFile= new BufferedReader(new FileReader("config/conf.txt"));
+    public static String [] carregarConf() throws Exception{
+        BufferedReader saveFile= new BufferedReader(new FileReader(FrameConfiguracio.directoriConfig + FrameConfiguracio.arxiuConfig));
         String host = saveFile.readLine(); 
         String db = saveFile.readLine();
         String user = saveFile.readLine();

@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +28,8 @@ import javax.swing.JScrollPane;
  * @author alumne
  */
 public class FrameConfiguracio extends javax.swing.JFrame {
-
+    public static final String directoriConfig = "config/";
+    public static final String arxiuConfig = "conf.txt";
     /**
      * Creates new form FrameConfiguracio
      */
@@ -41,7 +45,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         /** CARREGAR DADES CONFIG */
         try{
-            BufferedReader saveFile= new BufferedReader(new FileReader("config/conf.txt"));
+            BufferedReader saveFile= new BufferedReader(new FileReader(directoriConfig + arxiuConfig));
             hostField.setText(saveFile.readLine()); 
             databaseField.setText(saveFile.readLine());
             userField.setText(saveFile.readLine());
@@ -182,7 +186,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         new File("config").mkdirs();
         try{
-            FileWriter saveFile = new FileWriter("config/conf.txt");
+            FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
             saveFile.write(hostField.getText() + "\n");
             saveFile.write(databaseField.getText() + "\n");
             saveFile.write(userField.getText() + "\n");
@@ -190,8 +194,19 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             saveFile.close();
             JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
          }catch (Exception e){
-            System.out.println("Error: " + e);
-            JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);
+            //System.out.println("Error: " + e);
+            if(!Files.exists(Paths.get(directoriConfig))) { 
+                JOptionPane.showMessageDialog(this, "No s'ha pogur crear el directori de configuració");
+            }
+            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No s'ha pogur crear l'arxiu de configuració");
+            }
+            else if(!Files.isWritable(Paths.get(directoriConfig + arxiuConfig))){
+                JOptionPane.showMessageDialog(this, "No es tenen permisos d'escriptura sobre l'arxiu de configuració");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);
+            } 
          } 
     }//GEN-LAST:event_submitBtnActionPerformed
 
@@ -210,8 +225,19 @@ public class FrameConfiguracio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al realitzar la connexió");
             }
             connexio.disconnect();
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);
+        }catch (Exception e){
+            if(!Files.exists(Paths.get(directoriConfig))) { 
+                JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");
+            }
+            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");
+            }
+            else if(!Files.isReadable(Paths.get(directoriConfig + arxiuConfig))){
+                JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);
+            }
         }
     }//GEN-LAST:event_provarConnexioButtonActionPerformed
 

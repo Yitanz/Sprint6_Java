@@ -5,6 +5,9 @@
  */
 package Frames;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 
 /**
@@ -140,10 +143,14 @@ public class FrameInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
-        FrameConfiguracio fc = new FrameConfiguracio();
-        this.setVisible(false);
-        fc.setVisible(true);
-        this.dispose();
+        try {
+            FrameConfiguracio fc = new FrameConfiguracio();
+            this.setVisible(false);
+            fc.setVisible(true);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(FrameInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_configBtnActionPerformed
 
     private void atraccionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atraccionsBtnActionPerformed
