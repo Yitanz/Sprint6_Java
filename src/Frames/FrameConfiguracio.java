@@ -15,13 +15,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Key;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import Auxiliar.AES;
 
 /**
  *
@@ -186,11 +190,12 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         new File("config").mkdirs();
         try{
+            final String secretKey = "ssssssssssssssssssssssssas?";
             FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
             saveFile.write(hostField.getText() + "\n");
             saveFile.write(databaseField.getText() + "\n");
             saveFile.write(userField.getText() + "\n");
-            saveFile.write(passwordField.getText() + "\n");
+            saveFile.write(AES.encrypt(passwordField.getText(), secretKey) + "\n");
             saveFile.close();
             JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
          }catch (Exception e){

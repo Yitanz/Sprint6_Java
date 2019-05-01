@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.sql.Connection;                                                                       // Import per el SQL Connection
 import java.sql.DriverManager;                                                                    // Import per el SQL Drive Manager
 import Frames.FrameConfiguracio;
+import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import Auxiliar.AES;
 
 
 public class DBConnection {
@@ -35,12 +39,13 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    public static String [] carregarConf() throws Exception{
+    public String [] carregarConf() throws Exception{
+        final String secretKey = "ssssssssssssssssssssssssas?";
         BufferedReader saveFile= new BufferedReader(new FileReader(FrameConfiguracio.directoriConfig + FrameConfiguracio.arxiuConfig));
         String host = saveFile.readLine(); 
         String db = saveFile.readLine();
         String user = saveFile.readLine();
-        String pwd = saveFile.readLine();
+        String pwd = AES.decrypt(saveFile.readLine(), secretKey);
         
         String configuracio [] = {host, db, user, pwd};
         saveFile.close();
