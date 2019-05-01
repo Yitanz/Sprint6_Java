@@ -39,7 +39,7 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    public String [] carregarConf() throws Exception{
+    public static String [] carregarConf() throws Exception{
         final String secretKey = "ssssssssssssssssssssssssas?";
         BufferedReader saveFile= new BufferedReader(new FileReader(FrameConfiguracio.directoriConfig + FrameConfiguracio.arxiuConfig));
         String host = saveFile.readLine(); 

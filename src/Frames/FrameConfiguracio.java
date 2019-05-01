@@ -34,6 +34,8 @@ import Auxiliar.AES;
 public class FrameConfiguracio extends javax.swing.JFrame {
     public static final String directoriConfig = "config/";
     public static final String arxiuConfig = "conf.txt";
+    final String secretKey = "ssssssssssssssssssssssssas?";
+    
     /**
      * Creates new form FrameConfiguracio
      */
@@ -53,7 +55,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             hostField.setText(saveFile.readLine()); 
             databaseField.setText(saveFile.readLine());
             userField.setText(saveFile.readLine());
-            passwordField.setText("Fuiste altamente troliadoxdxd");
+            passwordField.setText(AES.decrypt(saveFile.readLine(), secretKey));
             saveFile.close();
         }catch (FileNotFoundException e){
             System.out.println ("Error al carregar la configuració: " + e);
@@ -190,11 +192,11 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         new File("config").mkdirs();
         try{
-            final String secretKey = "ssssssssssssssssssssssssas?";
             FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
             saveFile.write(hostField.getText() + "\n");
             saveFile.write(databaseField.getText() + "\n");
             saveFile.write(userField.getText() + "\n");
+            //System.out.println(passwordField.getText() + "empty: " + passwordField.getText().isEmpty());
             saveFile.write(AES.encrypt(passwordField.getText(), secretKey) + "\n");
             saveFile.close();
             JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
@@ -216,20 +218,20 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void provarConnexioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provarConnexioButtonActionPerformed
-        try{
-            Statement statement = null;
-            ResultSet resultSet = null;
-            DBConnection connexio = new DBConnection();
+        DBConnection connexio = new DBConnection();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try{    
             statement = connexio.getConnection().createStatement();
             resultSet = statement.executeQuery("select * from users limit 1");
             resultSet.first();
+            
             if (resultSet.getString("email") != null){
                 //System.out.println(resultSet.getString("email"));
                 JOptionPane.showMessageDialog(this, "Connexió correcta");
             }else{
                 JOptionPane.showMessageDialog(this, "Error al realitzar la connexió");
             }
-            connexio.disconnect();
         }catch (Exception e){
             if(!Files.exists(Paths.get(directoriConfig))) { 
                 JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");
@@ -242,6 +244,13 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);
+            }
+        }finally{
+            try {
+                statement.close();
+                connexio.disconnect();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
     }//GEN-LAST:event_provarConnexioButtonActionPerformed
