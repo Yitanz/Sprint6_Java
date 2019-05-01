@@ -191,15 +191,24 @@ public class FrameConfiguracio extends javax.swing.JFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         new File("config").mkdirs();
+        String emptyFields = "\n";
         try{
-            FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
-            saveFile.write(hostField.getText() + "\n");
-            saveFile.write(databaseField.getText() + "\n");
-            saveFile.write(userField.getText() + "\n");
-            //System.out.println(passwordField.getText() + "empty: " + passwordField.getText().isEmpty());
-            saveFile.write(AES.encrypt(passwordField.getText(), secretKey) + "\n");
-            saveFile.close();
-            JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
+            if(hostField.getText().isEmpty() || databaseField.getText().isEmpty() || userField.getText().isEmpty() || passwordField.getText().isEmpty()){
+                if(hostField.getText().isEmpty()){ emptyFields = emptyFields + "- Host\n";}
+                if (databaseField.getText().isEmpty()){emptyFields = emptyFields + "- Base de dades\n";}
+                if (userField.getText().isEmpty()){emptyFields = emptyFields + "- Usuari\n";}
+                if (passwordField.getText().isEmpty()){emptyFields = emptyFields + "- Contrasenya\n";}
+                JOptionPane.showMessageDialog(this, "Hi han camps sense omplir: " + emptyFields);
+            }else{
+                FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
+                saveFile.write(hostField.getText() + "\n");
+                saveFile.write(databaseField.getText() + "\n");
+                saveFile.write(userField.getText() + "\n");
+                //System.out.println(passwordField.getText() + "empty: " + passwordField.getText().isEmpty());
+                saveFile.write(AES.encrypt(passwordField.getText(), secretKey) + "\n");
+                saveFile.close();
+                JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
+            }
          }catch (Exception e){
             //System.out.println("Error: " + e);
             if(!Files.exists(Paths.get(directoriConfig))) { 
