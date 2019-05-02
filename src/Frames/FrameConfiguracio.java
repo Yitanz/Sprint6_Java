@@ -258,7 +258,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             try {
                 statement.close();
                 connexio.disconnect();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
