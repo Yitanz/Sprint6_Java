@@ -13,16 +13,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.Key;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import Auxiliar.AES;
@@ -91,7 +85,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Configuració");
 
-        jLabel2.setText("Host");
+        jLabel2.setText("Host (:port)");
 
         jLabel3.setText("Base de dades");
 
@@ -204,25 +198,15 @@ public class FrameConfiguracio extends javax.swing.JFrame {
                 saveFile.write(hostField.getText() + "\n");
                 saveFile.write(databaseField.getText() + "\n");
                 saveFile.write(userField.getText() + "\n");
-                //System.out.println(passwordField.getText() + "empty: " + passwordField.getText().isEmpty());
                 saveFile.write(AES.encrypt(passwordField.getText(), secretKey) + "\n");
                 saveFile.close();
                 JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
             }
          }catch (Exception e){
-            //System.out.println("Error: " + e);
-            if(!Files.exists(Paths.get(directoriConfig))) { 
-                JOptionPane.showMessageDialog(this, "No s'ha pogur crear el directori de configuració");
-            }
-            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {
-                JOptionPane.showMessageDialog(this, "No s'ha pogur crear l'arxiu de configuració");
-            }
-            else if(!Files.isWritable(Paths.get(directoriConfig + arxiuConfig))){
-                JOptionPane.showMessageDialog(this, "No es tenen permisos d'escriptura sobre l'arxiu de configuració");
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);
-            } 
+            if(!Files.exists(Paths.get(directoriConfig))) { JOptionPane.showMessageDialog(this, "No s'ha pogur crear el directori de configuració");}
+            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {JOptionPane.showMessageDialog(this, "No s'ha pogur crear l'arxiu de configuració");}
+            else if(!Files.isWritable(Paths.get(directoriConfig + arxiuConfig))){JOptionPane.showMessageDialog(this, "No es tenen permisos d'escriptura sobre l'arxiu de configuració");}
+            else{JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);} 
          } 
     }//GEN-LAST:event_submitBtnActionPerformed
 
@@ -236,13 +220,13 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             if(!Files.exists(Paths.get(directoriConfig))) { JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");}
             else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");}
             else if(!Files.isReadable(Paths.get(directoriConfig + arxiuConfig))){JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");}
-            else{JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);}
+            else{JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + connexio.getError());}
         }finally{
             try {
                 statement.close();
                 connexio.disconnect();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                //System.out.println("Error al tancar la connexió: " + e);
             }
         }
     }//GEN-LAST:event_provarConnexioButtonActionPerformed
