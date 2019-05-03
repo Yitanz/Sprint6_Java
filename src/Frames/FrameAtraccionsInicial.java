@@ -1,5 +1,7 @@
 package Frames;
 
+import Auxiliar.MetodesGenerals;
+import Classes.Atraccio;
 import javax.swing.JScrollPane;
 
 /**
@@ -15,12 +17,13 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect());
     }
 
     /**
@@ -40,6 +43,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Univeylandia Parc - Atraccions");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Atraccions");
@@ -48,6 +52,12 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
+            }
+        });
+
+        filterField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterFieldKeyReleased(evt);
             }
         });
 
@@ -121,6 +131,11 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         fi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void filterFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterFieldKeyReleased
+        String keyword = "(?i)"+filterField.getText();
+        MetodesGenerals.filterTable(resultTable, keyword);
+    }//GEN-LAST:event_filterFieldKeyReleased
 
     /**
      * @param args the command line arguments

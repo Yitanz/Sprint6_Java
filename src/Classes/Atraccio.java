@@ -7,6 +7,7 @@ import java.sql.Date;
  * @author Grup2: Evaldas Casas
  */
 public class Atraccio {
+
     private String nom_atraccio;
     private int tipus_atraccio;
     private Date data_innauguracio;
@@ -17,6 +18,33 @@ public class Atraccio {
     private String descripcio;
     private int votacions;
 
+    private static String query_tot = "SELECT a.id, nom_atraccio, ta.tipus, data_inauguracio, altura_min, altura_max, accessibilitat, "
+            + "acces_express, descripcio, path, votacions, a.created_at, a.updated_at "
+            + "FROM atraccions a "
+            + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
+
+    private static String querySelect = "SELECT a.nom_atraccio, ta.tipus FROM atraccions a "
+            + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
+
+    private static String queryUpdate = "UPDATE atraccions SET nom_atraccio = ?, tipus_atraccio = ?, data_inauguracio = ?, altura_min = ?, "
+            + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE id = ? ;";
+
+    private static String queryDelete = "DELETE FROM atraccions WHERE id = ? ;";
+
+    /* ************************************** Mètodes accessors a les sentencies SQL ************************************** */
+    public static String getQuerySelect() {
+        return querySelect;
+    }
+
+    public static String getQueryUpdate() {
+        return queryUpdate;
+    }
+
+    public static String getQueryDelete() {
+        return queryDelete;
+    }
+
+    /* ************************************** Mètodes accessors ************************************** */
     public String getNom_atraccio() {
         return nom_atraccio;
     }
