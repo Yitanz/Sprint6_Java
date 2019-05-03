@@ -173,6 +173,11 @@ public class FrameInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_clientsBtnActionPerformed
 
     private void employeesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesBtnActionPerformed
+        FrameEmpleatsInicial fai = new FrameEmpleatsInicial();
+        this.setVisible(false);
+        fai.setVisible(true);
+        this.dispose();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_employeesBtnActionPerformed
 
