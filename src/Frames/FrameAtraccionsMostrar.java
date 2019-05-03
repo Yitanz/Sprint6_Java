@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frames;
 
 import javax.swing.JScrollPane;
 
 /**
  *
- * @author alumne
+ * @author Grup 2: Evaldas Casas
  */
 public class FrameAtraccionsMostrar extends javax.swing.JFrame {
 
