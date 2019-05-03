@@ -232,15 +232,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
         ResultSet resultSet = null;
         try{    
             statement = connexio.getConnection().createStatement();
-            resultSet = statement.executeQuery("select * from users limit 1");
-            resultSet.first();
-            
-            if (resultSet.getString("email") != null){
-                //System.out.println(resultSet.getString("email"));
-                JOptionPane.showMessageDialog(this, "Connexió correcta");
-            }else{
-                JOptionPane.showMessageDialog(this, "Error al realitzar la connexió");
-            }
+            JOptionPane.showMessageDialog(this, "Connexió correcta");
         }catch (Exception e){
             if(!Files.exists(Paths.get(directoriConfig))) { 
                 JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");
