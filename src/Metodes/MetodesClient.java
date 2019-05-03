@@ -2,7 +2,7 @@ package Metodes;
 
 /**
  *
- * @author Grup 2: Evaldas Casas
+ * @author Grup 1: Ivan Morte
  */
 public class MetodesClient {
     
