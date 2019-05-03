@@ -229,23 +229,14 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     private void provarConnexioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provarConnexioButtonActionPerformed
         DBConnection connexio = new DBConnection();
         Statement statement = null;
-        ResultSet resultSet = null;
         try{    
             statement = connexio.getConnection().createStatement();
             JOptionPane.showMessageDialog(this, "Connexió correcta");
         }catch (Exception e){
-            if(!Files.exists(Paths.get(directoriConfig))) { 
-                JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");
-            }
-            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {
-                JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");
-            }
-            else if(!Files.isReadable(Paths.get(directoriConfig + arxiuConfig))){
-                JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);
-            }
+            if(!Files.exists(Paths.get(directoriConfig))) { JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");}
+            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");}
+            else if(!Files.isReadable(Paths.get(directoriConfig + arxiuConfig))){JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");}
+            else{JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + e);}
         }finally{
             try {
                 statement.close();
