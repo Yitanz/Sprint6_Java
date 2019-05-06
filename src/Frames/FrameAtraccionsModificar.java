@@ -1,6 +1,18 @@
 package Frames;
 
+import Auxiliar.MetodesGenerals;
+import Auxiliar.SharedData;
+import Classes.Atraccio;
+import Metodes.MetodesAtraccio;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,12 +27,44 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        dateField.setDateFormatString(MetodesGenerals.DATE_FORMAT);
+        carregarDades();
+    }
+
+    /**
+     * Mètode que plena un objecte de tipus Atraccio amb les dades pertinents i
+     * aquestes les carrega en els camps del formulari.
+     *
+     * @author Evaldas Casas
+     */
+    private void carregarDades() {
+        String nameAtraccio = SharedData.getNomAtraccio();
+
+        Atraccio atr = MetodesAtraccio.getDadesAtraccio(nameAtraccio, typeField, Atraccio.getQueryShow());
+
+        nameField.setText(atr.getNom_atraccio());
+        typeField.setSelectedItem(atr.getTipus_atraccio_string());
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateInaug = null;
+        try {
+            dateInaug = format.parse(atr.getData_innauguracio());
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameAtraccionsMostrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        dateField.setDate(dateInaug);
+        minField.setText(atr.getAltura_min() + "");
+        maxField.setText(atr.getAltura_max() + "");
+        accessibilityField.setSelectedIndex(Integer.parseInt(atr.isAccessibilitat()));
+        expressField.setSelectedIndex(Integer.parseInt(atr.isAcces_expres()));
+        descField.setText(atr.getDescripcio());
     }
 
     /**
@@ -63,8 +107,6 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
 
         jLabel3.setText("Tipus atracció");
 
-        typeField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Data inauguració");
 
         jLabel5.setText("Altura mínima");
@@ -73,18 +115,22 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
 
         jLabel7.setText("Accessibilitat");
 
-        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        accessibilityField.setSelectedIndex(-1);
 
         jLabel8.setText("Accés exprés");
 
-        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        expressField.setSelectedIndex(-1);
 
         jLabel9.setText("Descripció");
 
         descField.setColumns(20);
+        descField.setLineWrap(true);
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +138,13 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ok_small.png"))); // NOI18N
         submitBtn.setText("Acceptar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +234,10 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        modificarAtraccio();
+    }//GEN-LAST:event_submitBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,14 +265,55 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new FrameAtraccionsModificar().setVisible(true);
             }
         });
+    }
+
+    /**
+     *
+     */
+    public void modificarAtraccio() {
+        String nameAtraccio = SharedData.getNomAtraccio();
+        try {
+            String name = nameField.getText();
+            int type = typeField.getSelectedIndex() + 1;
+            String date = ((JTextField) dateField.getDateEditor().getUiComponent()).getText();
+            int min = Integer.parseInt(minField.getText());
+            int max = Integer.parseInt(maxField.getText());
+            String accessibility = String.valueOf(accessibilityField.getSelectedIndex());
+            String express = String.valueOf(expressField.getSelectedIndex());
+            String desc = descField.getText();
+
+            if (name.isEmpty() || date.isEmpty() || minField.getText().isEmpty()
+                    || maxField.getText().isEmpty() || accessibilityField.getSelectedIndex() == -1
+                    || expressField.getSelectedIndex() == -1 || desc.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+            } else {
+                Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);
+
+                int rowsInserted = MetodesAtraccio.ModificarAtraccio(nameAtraccio, atr);
+
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "S'ha modificat el registre!");
+                }
+                
+                /* Tornar a la finestra anterior */
+                FrameAtraccionsInicial fai = new FrameAtraccionsInicial();
+                this.setVisible(false);
+                fai.setVisible(true);
+                this.dispose();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

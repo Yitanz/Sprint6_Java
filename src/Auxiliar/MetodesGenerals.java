@@ -25,8 +25,7 @@ public class MetodesGenerals {
     final public static String DATE_FORMAT = "yyyy-MM-dd";
 
     /**
-     * Mètode auxiliar que rep un JTable i un String de query i genera una taula
-     * de forma dinàmica.
+     * Mètode auxiliar genera una taula de forma dinàmica.
      *
      * @param resultTable
      * @param query
@@ -92,7 +91,7 @@ public class MetodesGenerals {
     }
 
     /**
-     * Mètode que rep un JTable i un String per filtrar dades d'un JTable.
+     * Mètode que filtra dades d'un JTable.
      *
      * @param resultsTable
      * @param keyword

@@ -3,6 +3,7 @@ package Frames;
 import Auxiliar.MetodesGenerals;
 import Classes.Atraccio;
 import Metodes.MetodesAtraccio;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -88,6 +89,7 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         jLabel9.setText("Descripció");
 
         descField.setColumns(20);
+        descField.setLineWrap(true);
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
@@ -196,28 +198,7 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String name = nameField.getText();
-        int type = typeField.getSelectedIndex() + 1;
-        String date = ((JTextField) dateField.getDateEditor().getUiComponent()).getText();
-        int min = Integer.parseInt(minField.getText());
-        int max = Integer.parseInt(maxField.getText());
-        String accessibility = String.valueOf(accessibilityField.getSelectedIndex());
-        String express = String.valueOf(expressField.getSelectedIndex());
-        String desc = descField.getText();
-
-        Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);
-
-        MetodesAtraccio.RegistrarAtraccio(atr);
-
-        /* Buidar els camps del formulari */
-        nameField.setText("");
-        typeField.setSelectedIndex(-1);
-        dateField.setCalendar(null);
-        minField.setText("");
-        maxField.setText("");
-        accessibilityField.setSelectedIndex(-1);
-        expressField.setSelectedIndex(-1);
-        descField.setText("");
+        crearAtraccio();
     }//GEN-LAST:event_submitBtnActionPerformed
 
     /**
@@ -253,6 +234,50 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
                 new FrameAtraccionsInserir().setVisible(true);
             }
         });
+    }
+
+    /**
+     *
+     */
+    public void crearAtraccio() {
+        try {
+            String name = nameField.getText();
+            int type = typeField.getSelectedIndex() + 1;
+            String date = ((JTextField) dateField.getDateEditor().getUiComponent()).getText();
+            int min = Integer.parseInt(minField.getText());
+            int max = Integer.parseInt(maxField.getText());
+            String accessibility = String.valueOf(accessibilityField.getSelectedIndex());
+            String express = String.valueOf(expressField.getSelectedIndex());
+            String desc = descField.getText();
+
+            if (name.isEmpty() || date.isEmpty() || minField.getText().isEmpty()
+                    || maxField.getText().isEmpty() || accessibilityField.getSelectedIndex() == -1
+                    || expressField.getSelectedIndex() == -1 || desc.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+            } else {
+                Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);
+
+                int rowsInserted = MetodesAtraccio.RegistrarAtraccio(atr);
+
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "S'ha inserit un nou registre!");
+                }
+
+                /* Buidar els camps del formulari */
+                nameField.setText("");
+                typeField.setSelectedIndex(-1);
+                dateField.setCalendar(null);
+                minField.setText("");
+                maxField.setText("");
+                accessibilityField.setSelectedIndex(-1);
+                expressField.setSelectedIndex(-1);
+                descField.setText("");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

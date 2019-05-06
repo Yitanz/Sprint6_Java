@@ -3,6 +3,8 @@ package Frames;
 import Auxiliar.MetodesGenerals;
 import Auxiliar.SharedData;
 import Classes.Atraccio;
+import Metodes.MetodesAtraccio;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
@@ -24,11 +26,17 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
-        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect());
+
+        carregarTaula();
+    }
+
+    private void carregarTaula() {
         /* Per defecte desactivar els botons */
         showBtn.setEnabled(false);
         editBtn.setEnabled(false);
         deleteBtn.setEnabled(false);
+
+        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect());
     }
 
     /**
@@ -104,9 +112,19 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
 
         editBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/edit_small.png"))); // NOI18N
         editBtn.setText("Modificar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/delete_small.png"))); // NOI18N
         deleteBtn.setText("Eliminar");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,16 +202,48 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
     private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
         int columna = 0;
         int fila = resultTable.getSelectedRow();
-        String id_seleccionat = resultTable.getModel().getValueAt(fila, columna).toString();
-        
-        SharedData.setNomAtraccio(id_seleccionat);
+        String atraccio = resultTable.getModel().getValueAt(fila, columna).toString();
 
-        System.out.println(id_seleccionat);
+        SharedData.setNomAtraccio(atraccio);
+
+        System.out.println(atraccio);
 
         FrameAtraccionsMostrar fam = new FrameAtraccionsMostrar();
         this.setVisible(false);
         fam.setVisible(true);
     }//GEN-LAST:event_showBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        int columna = 0;
+        int fila = resultTable.getSelectedRow();
+        String atraccio = resultTable.getModel().getValueAt(fila, columna).toString();
+
+        SharedData.setNomAtraccio(atraccio);
+
+        System.out.println(atraccio);
+
+        FrameAtraccionsModificar famod = new FrameAtraccionsModificar();
+        this.setVisible(false);
+        famod.setVisible(true);
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        int columna = 0;
+        int fila = resultTable.getSelectedRow();
+        String atraccio = resultTable.getModel().getValueAt(fila, columna).toString();
+
+        int input = JOptionPane.showConfirmDialog(null,
+                "Estàs segur de voler eliminar el registre: " + atraccio + "?", "Eliminar atracció", JOptionPane.OK_CANCEL_OPTION);
+
+        if (input == 0) {
+            int rowsInserted = MetodesAtraccio.EliminarAtraccio(atraccio, Atraccio.getQueryDelete());
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "S'ha eliminat el registre: " + atraccio);
+                carregarTaula();
+            }
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -18,18 +18,24 @@ public class Atraccio {
     private String acces_expres;
     private String descripcio;
 
-    private static String query_tot = "SELECT a.id, nom_atraccio, ta.tipus, data_inauguracio, altura_min, altura_max, accessibilitat, "
+    /*
+    private static String queryOG = "SELECT a.id, nom_atraccio, ta.tipus, data_inauguracio, altura_min, altura_max, accessibilitat, "
             + "acces_express, descripcio, path, votacions, a.created_at, a.updated_at "
             + "FROM atraccions a "
             + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
+     */
+    
+    private static String queryShow = "SELECT a.nom_atraccio, ta.tipus, a.data_inauguracio, a.altura_min, "
+            + "a.altura_max, a.accessibilitat, a.acces_express, a.descripcio "
+            + "FROM atraccions a JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id WHERE a.nom_atraccio = ?";
 
     private static String querySelect = "SELECT a.nom_atraccio, ta.tipus FROM atraccions a "
             + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
 
     private static String queryUpdate = "UPDATE atraccions SET nom_atraccio = ?, tipus_atraccio = ?, data_inauguracio = ?, altura_min = ?, "
-            + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE id = ? ;";
+            + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE nom_atraccio = ? ;";
 
-    private static String queryDelete = "DELETE FROM atraccions WHERE id = ? ;";
+    private static String queryDelete = "DELETE FROM atraccions WHERE nom_atraccio = ? ;";
 
     /* ************************************** Constructors ************************************** */
     public Atraccio(String nom_atraccio, int tipus_atraccio, String data_innauguracio, int altura_min, int altura_max, String accessibilitat, String acces_expres, String descripcio) {
@@ -55,6 +61,10 @@ public class Atraccio {
     }
 
     /* ************************************** Mètodes accessors a les sentencies SQL ************************************** */
+    public static String getQueryShow() {
+        return queryShow;
+    }
+
     public static String getQuerySelect() {
         return querySelect;
     }

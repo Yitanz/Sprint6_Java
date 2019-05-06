@@ -18,8 +18,6 @@ import javax.swing.JScrollPane;
  */
 public class FrameAtraccionsMostrar extends javax.swing.JFrame {
 
-    String nameAtraccio = SharedData.getNomAtraccio();
-
     /**
      * Creates new form FrameAtraccionsInserir
      *
@@ -29,18 +27,34 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         carregarGUI();
     }
 
+    /**
+     * Carrega la interfície gràfica del formulari.
+     *
+     * @author Evaldas Casas
+     */
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
         dateField.setDateFormatString(MetodesGenerals.DATE_FORMAT);
-        
-        Atraccio atr = MetodesAtraccio.getDadesAtraccio(nameAtraccio, typeField);
-        
-        nameField.setText(atr.getNom_atraccio());        
+        carregarDades();
+    }
+
+    /**
+     * Mètode que plena un objecte de tipus Atraccio amb les dades pertinents i
+     * aquestes les carrega en els camps del formulari.
+     *
+     * @author Evaldas Casas
+     */
+    private void carregarDades() {
+        String nameAtraccio = SharedData.getNomAtraccio();
+
+        Atraccio atr = MetodesAtraccio.getDadesAtraccio(nameAtraccio, typeField, Atraccio.getQueryShow());
+
+        nameField.setText(atr.getNom_atraccio());
         typeField.setSelectedItem(atr.getTipus_atraccio_string());
-        
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dateInaug = null;
         try {
@@ -50,8 +64,8 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         }
 
         dateField.setDate(dateInaug);
-        minField.setText(atr.getAltura_min()+"");
-        maxField.setText(atr.getAltura_max()+"");
+        minField.setText(atr.getAltura_min() + "");
+        maxField.setText(atr.getAltura_max() + "");
         accessibilityField.setSelectedIndex(Integer.parseInt(atr.isAccessibilitat()));
         expressField.setSelectedIndex(Integer.parseInt(atr.isAcces_expres()));
         descField.setText(atr.getDescripcio());
@@ -124,6 +138,7 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         jLabel9.setText("Descripció");
 
         descField.setColumns(20);
+        descField.setLineWrap(true);
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
