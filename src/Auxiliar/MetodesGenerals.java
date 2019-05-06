@@ -5,6 +5,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +35,10 @@ public class MetodesGenerals {
     public static void loadTable(JTable resultTable, String query) {
         try {
             ArrayList columnNames = new ArrayList();
+            
+            JButton show = new JButton();
+            JButton edit = new JButton();
+            JButton delete = new JButton();
 
             stmt = connexio.getConnection().createStatement();
 
@@ -56,6 +61,9 @@ public class MetodesGenerals {
             for (int i = 0; i < columnNames.size(); i++) {
                 model.addColumn(columnNames.get(i));
             }
+            model.addColumn("Mostrar");
+            model.addColumn("Editar");
+            model.addColumn("Eliminar");
 
             /* mostrar les dades en la taula despres d'haver-les guardat en un Objecte[] */
             while (rs.next()) {
@@ -67,6 +75,7 @@ public class MetodesGenerals {
                 model.addRow(row);
             }
 
+            connexio.disconnect();
             rs.close();
 
         } catch (SQLException e) {
