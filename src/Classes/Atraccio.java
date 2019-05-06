@@ -10,13 +10,12 @@ public class Atraccio {
 
     private String nom_atraccio;
     private int tipus_atraccio;
-    private Date data_innauguracio;
+    private String data_innauguracio;
     private int altura_min;
     private int altura_max;
-    private boolean accessibilitat;
-    private boolean acces_expres;
+    private String accessibilitat;
+    private String acces_expres;
     private String descripcio;
-    private int votacions;
 
     private static String query_tot = "SELECT a.id, nom_atraccio, ta.tipus, data_inauguracio, altura_min, altura_max, accessibilitat, "
             + "acces_express, descripcio, path, votacions, a.created_at, a.updated_at "
@@ -30,6 +29,18 @@ public class Atraccio {
             + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE id = ? ;";
 
     private static String queryDelete = "DELETE FROM atraccions WHERE id = ? ;";
+    
+    /* ************************************** Constructors ************************************** */
+    public Atraccio(String nom_atraccio, int tipus_atraccio, String data_innauguracio, int altura_min, int altura_max, String accessibilitat, String acces_expres, String descripcio) {
+        this.nom_atraccio = nom_atraccio;
+        this.tipus_atraccio = tipus_atraccio;
+        this.data_innauguracio = data_innauguracio;
+        this.altura_min = altura_min;
+        this.altura_max = altura_max;
+        this.accessibilitat = accessibilitat;
+        this.acces_expres = acces_expres;
+        this.descripcio = descripcio;
+    }
 
     /* ************************************** Mètodes accessors a les sentencies SQL ************************************** */
     public static String getQuerySelect() {
@@ -61,11 +72,11 @@ public class Atraccio {
         this.tipus_atraccio = tipus_atraccio;
     }
 
-    public Date getData_innauguracio() {
+    public String getData_innauguracio() {
         return data_innauguracio;
     }
 
-    public void setData_innauguracio(Date data_innauguracio) {
+    public void setData_innauguracio(String data_innauguracio) {
         this.data_innauguracio = data_innauguracio;
     }
 
@@ -85,19 +96,19 @@ public class Atraccio {
         this.altura_max = altura_max;
     }
 
-    public boolean isAccessibilitat() {
+    public String isAccessibilitat() {
         return accessibilitat;
     }
 
-    public void setAccessibilitat(boolean accessibilitat) {
+    public void setAccessibilitat(String accessibilitat) {
         this.accessibilitat = accessibilitat;
     }
 
-    public boolean isAcces_expres() {
+    public String isAcces_expres() {
         return acces_expres;
     }
 
-    public void setAcces_expres(boolean acces_expres) {
+    public void setAcces_expres(String acces_expres) {
         this.acces_expres = acces_expres;
     }
 
@@ -107,13 +118,5 @@ public class Atraccio {
 
     public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
-    }
-
-    public int getVotacions() {
-        return votacions;
-    }
-
-    public void setVotacions(int votacions) {
-        this.votacions = votacions;
     }
 }

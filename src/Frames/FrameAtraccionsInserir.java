@@ -1,6 +1,10 @@
 package Frames;
 
+import Auxiliar.MetodesGenerals;
+import Classes.Atraccio;
+import Metodes.MetodesAtraccio;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,12 +19,14 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        dateField.setDateFormatString(MetodesGenerals.DATE_FORMAT);
+        MetodesAtraccio.getTipusAtraccions(typeField);
     }
 
     /**
@@ -63,8 +69,6 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
 
         jLabel3.setText("Tipus atracció");
 
-        typeField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Data inauguració");
 
         jLabel5.setText("Altura mínima");
@@ -73,11 +77,13 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
 
         jLabel7.setText("Accessibilitat");
 
-        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        accessibilityField.setSelectedIndex(-1);
 
         jLabel8.setText("Accés exprés");
 
-        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        expressField.setSelectedIndex(-1);
 
         jLabel9.setText("Descripció");
 
@@ -93,6 +99,11 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         });
 
         submitBtn.setText("Acceptar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +193,31 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        String name = nameField.getText();
+        int type = typeField.getSelectedIndex() + 1;
+        String date = ((JTextField) dateField.getDateEditor().getUiComponent()).getText();
+        int min = Integer.parseInt(minField.getText());
+        int max = Integer.parseInt(maxField.getText());
+        String accessibility = String.valueOf(accessibilityField.getSelectedIndex());
+        String express = String.valueOf(expressField.getSelectedIndex());
+        String desc = descField.getText();
+
+        Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);
+
+        MetodesAtraccio.RegistrarAtraccio(atr);
+
+        /* Buidar els camps del formulari */
+        nameField.setText("");
+        typeField.setSelectedIndex(-1);
+        dateField.setCalendar(null);
+        minField.setText("");
+        maxField.setText("");
+        accessibilityField.setSelectedIndex(-1);
+        expressField.setSelectedIndex(-1);
+        descField.setText("");
+    }//GEN-LAST:event_submitBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,7 +245,6 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

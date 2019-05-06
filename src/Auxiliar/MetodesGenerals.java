@@ -22,6 +22,8 @@ public class MetodesGenerals {
     static ResultSet rs = null;
 
     static DefaultTableModel model;
+    
+    final public static String DATE_FORMAT = "yyyy-MM-dd";
 
 /**
      * Mètode auxiliar que rep un JTable i un String de query i genera una taula
@@ -39,6 +41,7 @@ public class MetodesGenerals {
         try {
 
             model = new DefaultTableModel() {
+                @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
@@ -81,6 +84,7 @@ public class MetodesGenerals {
                 model.addRow(row);
             }
 
+            /* Per defecte desactivar els botons */
             showBtn.setEnabled(false);
             editBtn.setEnabled(false);
             deleteBtn.setEnabled(false);
