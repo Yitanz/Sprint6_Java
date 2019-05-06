@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class MetodesGenerals {
 
-    static DBConnection connexio = new DBConnection();
+    static DBConnection connexio;
     static Statement stmt = null;
     static ResultSet rs = null;
 
@@ -39,7 +39,7 @@ public class MetodesGenerals {
             JButton show = new JButton();
             JButton edit = new JButton();
             JButton delete = new JButton();
-
+            connexio = new DBConnection();
             stmt = connexio.getConnection().createStatement();
 
             rs = stmt.executeQuery(query);
