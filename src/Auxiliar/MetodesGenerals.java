@@ -21,7 +21,7 @@ public class MetodesGenerals {
     static Statement stmt = null;
     static ResultSet rs = null;
 
-    static DefaultTableModel model = new DefaultTableModel();
+    static DefaultTableModel model;
 
     /**
      * Mètode auxiliar que rep un JTable i un String de query i genera una taula
@@ -56,6 +56,7 @@ public class MetodesGenerals {
             }
 
             /* Generar taula */
+            model = new DefaultTableModel();
             resultTable.setModel(model);
 
             for (int i = 0; i < columnNames.size(); i++) {
