@@ -93,6 +93,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
 
         jLabel5.setText("Contrasenya");
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ok_small.png"))); // NOI18N
         submitBtn.setText("Acceptar");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +109,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             }
         });
 
+        provarConnexioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/connection_small.png"))); // NOI18N
         provarConnexioButton.setText("Provar connexió");
         provarConnexioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

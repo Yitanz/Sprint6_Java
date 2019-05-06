@@ -5,7 +5,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +21,10 @@ public class MetodesGenerals {
     static ResultSet rs = null;
 
     static DefaultTableModel model;
-    
+
     final public static String DATE_FORMAT = "yyyy-MM-dd";
 
-/**
+    /**
      * Mètode auxiliar que rep un JTable i un String de query i genera una taula
      * de forma dinàmica.
      *
@@ -33,11 +32,8 @@ public class MetodesGenerals {
      * @param query
      *
      * @author Evaldas Casas
-     * @param showBtn
-     * @param editBtn
-     * @param deleteBtn
      */
-    public static void loadTable(JTable resultTable, String query, JButton showBtn, JButton editBtn, JButton deleteBtn) {
+    public static void loadTable(JTable resultTable, String query) {
         try {
 
             model = new DefaultTableModel() {
@@ -46,7 +42,7 @@ public class MetodesGenerals {
                     return false;
                 }
             };
-            
+
             ArrayList columnNames = new ArrayList();
 
             connexio = new DBConnection();
@@ -78,16 +74,10 @@ public class MetodesGenerals {
                 Object[] row = new Object[columnCount];
 
                 for (int i = 0; i < columnCount; ++i) {
-                    System.out.println(columnCount);
                     row[i] = rs.getObject(i + 1);
                 }
                 model.addRow(row);
             }
-
-            /* Per defecte desactivar els botons */
-            showBtn.setEnabled(false);
-            editBtn.setEnabled(false);
-            deleteBtn.setEnabled(false);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -1,6 +1,7 @@
 package Frames;
 
 import Auxiliar.MetodesGenerals;
+import Auxiliar.SharedData;
 import Classes.Atraccio;
 import javax.swing.JScrollPane;
 
@@ -23,7 +24,11 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
-        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect(), showBtn, editBtn, deleteBtn);
+        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect());
+        /* Per defecte desactivar els botons */
+        showBtn.setEnabled(false);
+        editBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
     }
 
     /**
@@ -51,6 +56,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Atraccions");
 
+        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/plus_small.png"))); // NOI18N
         addBtn.setText("Afegir");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +86,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(resultTable);
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,10 +94,18 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
             }
         });
 
+        showBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eye_small.png"))); // NOI18N
         showBtn.setText("Mostrar");
+        showBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBtnActionPerformed(evt);
+            }
+        });
 
+        editBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/edit_small.png"))); // NOI18N
         editBtn.setText("Modificar");
 
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/delete_small.png"))); // NOI18N
         deleteBtn.setText("Eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,7 +118,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
                     .addComponent(filterField)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                         .addComponent(addBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(showBtn)
@@ -156,7 +171,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void filterFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterFieldKeyReleased
-        String keyword = "(?i)"+filterField.getText();
+        String keyword = "(?i)" + filterField.getText();
         MetodesGenerals.filterTable(resultTable, keyword);
     }//GEN-LAST:event_filterFieldKeyReleased
 
@@ -165,6 +180,20 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         editBtn.setEnabled(true);
         deleteBtn.setEnabled(true);
     }//GEN-LAST:event_resultTableMouseClicked
+
+    private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
+        int columna = 0;
+        int fila = resultTable.getSelectedRow();
+        String id_seleccionat = resultTable.getModel().getValueAt(fila, columna).toString();
+        
+        SharedData.setNomAtraccio(id_seleccionat);
+
+        System.out.println(id_seleccionat);
+
+        FrameAtraccionsMostrar fam = new FrameAtraccionsMostrar();
+        this.setVisible(false);
+        fam.setVisible(true);
+    }//GEN-LAST:event_showBtnActionPerformed
 
     /**
      * @param args the command line arguments

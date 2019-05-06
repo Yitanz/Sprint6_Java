@@ -1,5 +1,15 @@
 package Frames;
 
+import Auxiliar.MetodesGenerals;
+import Auxiliar.SharedData;
+import Classes.Atraccio;
+import Metodes.MetodesAtraccio;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 
 /**
@@ -8,8 +18,11 @@ import javax.swing.JScrollPane;
  */
 public class FrameAtraccionsMostrar extends javax.swing.JFrame {
 
+    String nameAtraccio = SharedData.getNomAtraccio();
+
     /**
      * Creates new form FrameAtraccionsInserir
+     *
      */
     public FrameAtraccionsMostrar() {
         initComponents();
@@ -21,6 +34,36 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        dateField.setDateFormatString(MetodesGenerals.DATE_FORMAT);
+        
+        Atraccio atr = MetodesAtraccio.getDadesAtraccio(nameAtraccio, typeField);
+        
+        nameField.setText(atr.getNom_atraccio());        
+        typeField.setSelectedItem(atr.getTipus_atraccio_string());
+        
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateInaug = null;
+        try {
+            dateInaug = format.parse(atr.getData_innauguracio());
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameAtraccionsMostrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        dateField.setDate(dateInaug);
+        minField.setText(atr.getAltura_min()+"");
+        maxField.setText(atr.getAltura_max()+"");
+        accessibilityField.setSelectedIndex(Integer.parseInt(atr.isAccessibilitat()));
+        expressField.setSelectedIndex(Integer.parseInt(atr.isAcces_expres()));
+        descField.setText(atr.getDescripcio());
+
+        nameField.setEnabled(false);
+        typeField.setEnabled(false);
+        dateField.setEnabled(false);
+        minField.setEnabled(false);
+        maxField.setEnabled(false);
+        accessibilityField.setEnabled(false);
+        expressField.setEnabled(false);
+        descField.setEnabled(false);
     }
 
     /**
@@ -51,7 +94,6 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         descField = new javax.swing.JTextArea();
         backBtn = new javax.swing.JButton();
-        submitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Univeylandia Parc - Atraccions");
@@ -63,8 +105,6 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
 
         jLabel3.setText("Tipus atracció");
 
-        typeField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Data inauguració");
 
         jLabel5.setText("Altura mínima");
@@ -73,11 +113,13 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
 
         jLabel7.setText("Accessibilitat");
 
-        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        accessibilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        accessibilityField.setSelectedIndex(-1);
 
         jLabel8.setText("Accés exprés");
 
-        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        expressField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
+        expressField.setSelectedIndex(-1);
 
         jLabel9.setText("Descripció");
 
@@ -85,14 +127,13 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
             }
         });
-
-        submitBtn.setText("Acceptar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,8 +164,6 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(submitBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(backBtn)))
                 .addContainerGap())
         );
@@ -166,9 +205,7 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backBtn)
-                    .addComponent(submitBtn))
+                .addComponent(backBtn)
                 .addContainerGap())
         );
 
@@ -237,7 +274,6 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
     private javax.swing.JTextField maxField;
     private javax.swing.JTextField minField;
     private javax.swing.JTextField nameField;
-    private javax.swing.JButton submitBtn;
     private javax.swing.JComboBox<String> typeField;
     // End of variables declaration//GEN-END:variables
 }

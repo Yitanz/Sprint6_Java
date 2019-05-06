@@ -91,6 +91,7 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         descField.setRows(5);
         jScrollPane1.setViewportView(descField);
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +99,7 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ok_small.png"))); // NOI18N
         submitBtn.setText("Acceptar");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

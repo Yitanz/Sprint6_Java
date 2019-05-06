@@ -46,7 +46,7 @@ public class MetodesAtraccio {
             pst.setString(7, atr.isAcces_expres());
             pst.setString(8, atr.getDescripcio());
             pst.setString(9, "NO");
-            
+
             rowsInserted = pst.executeUpdate();
 
             /*if (rowsInserted > 0) {
@@ -69,7 +69,7 @@ public class MetodesAtraccio {
     public static void getTipusAtraccions(JComboBox typeField) {
         try {
             connexio = new DBConnection();
-            
+
             String tipus_atraccions_query = "SELECT tipus FROM tipus_atraccions";
 
             stmt = connexio.getConnection().createStatement();
@@ -87,5 +87,59 @@ public class MetodesAtraccio {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static Atraccio getDadesAtraccio(String nomAtraccio, JComboBox typeField) {
+        System.out.println(nomAtraccio);
+        Atraccio atr = null;
+        try {
+            connexio = new DBConnection();
+
+            String tipus_atraccions_query = "SELECT tipus FROM tipus_atraccions";
+
+            stmt = connexio.getConnection().createStatement();
+
+            rs = stmt.executeQuery(tipus_atraccions_query);
+
+            /* Omplir el ComboBox amb els noms dels tipus d'atraccions */
+            while (rs.next()) {
+                typeField.addItem(rs.getString("tipus"));
+            }
+
+            String atraccio_dades_query = "SELECT a.nom_atraccio, ta.tipus, a.data_inauguracio, a.altura_min, "
+                    + "a.altura_max, a.accessibilitat, a.acces_express, a.descripcio "
+                    + "FROM atraccions a JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id WHERE a.nom_atraccio = ?";
+            
+            pst = connexio.getConnection().prepareStatement(atraccio_dades_query);
+
+            pst.setString(1, nomAtraccio);
+
+            ResultSet resultSet2 = pst.executeQuery();
+
+            resultSet2.first();
+
+            /* Omplir els camps amb les dades de la query */
+            String name = resultSet2.getString("nom_atraccio");
+            String type = resultSet2.getString("tipus");
+            String data = resultSet2.getString("data_inauguracio");
+            int min = resultSet2.getInt("altura_min");
+            int max = resultSet2.getInt("altura_max");
+            String accessibility = resultSet2.getString("accessibilitat");
+            String express = resultSet2.getString("acces_express");
+            String desc = resultSet2.getString("descripcio");
+
+            atr = new Atraccio(name, type, data, min, max, accessibility, express, desc);
+
+            /* Tancar connexió, statements i resultSet */
+            connexio.disconnect();
+            stmt.close();
+            rs.close();
+            resultSet2.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //JOptionPane.showMessageDialog(this, e);
+        }
+        return atr;
     }
 }

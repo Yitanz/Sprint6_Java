@@ -10,6 +10,7 @@ public class Atraccio {
 
     private String nom_atraccio;
     private int tipus_atraccio;
+    private String tipus_atraccio_string;
     private String data_innauguracio;
     private int altura_min;
     private int altura_max;
@@ -29,7 +30,7 @@ public class Atraccio {
             + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE id = ? ;";
 
     private static String queryDelete = "DELETE FROM atraccions WHERE id = ? ;";
-    
+
     /* ************************************** Constructors ************************************** */
     public Atraccio(String nom_atraccio, int tipus_atraccio, String data_innauguracio, int altura_min, int altura_max, String accessibilitat, String acces_expres, String descripcio) {
         this.nom_atraccio = nom_atraccio;
@@ -40,6 +41,17 @@ public class Atraccio {
         this.accessibilitat = accessibilitat;
         this.acces_expres = acces_expres;
         this.descripcio = descripcio;
+    }
+
+    public Atraccio(String name, String type, String data, int min, int max, String accessibility, String express, String desc) {
+        this.nom_atraccio = name;
+        this.tipus_atraccio_string = type;
+        this.data_innauguracio = data;
+        this.altura_min = min;
+        this.altura_max = max;
+        this.accessibilitat = accessibility;
+        this.acces_expres = express;
+        this.descripcio = desc;
     }
 
     /* ************************************** Mètodes accessors a les sentencies SQL ************************************** */
@@ -70,6 +82,14 @@ public class Atraccio {
 
     public void setTipus_atraccio(int tipus_atraccio) {
         this.tipus_atraccio = tipus_atraccio;
+    }
+
+    public String getTipus_atraccio_string() {
+        return tipus_atraccio_string;
+    }
+
+    public void setTipus_atraccio_string(String tipus_atraccio_string) {
+        this.tipus_atraccio_string = tipus_atraccio_string;
     }
 
     public String getData_innauguracio() {

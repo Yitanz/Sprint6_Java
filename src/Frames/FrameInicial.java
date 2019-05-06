@@ -47,6 +47,7 @@ public class FrameInicial extends javax.swing.JFrame {
         incidenciesBtn = new javax.swing.JButton();
         tiquetsBtn = new javax.swing.JButton();
         configBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Univeylandia Parc - Inici");
@@ -55,6 +56,7 @@ public class FrameInicial extends javax.swing.JFrame {
         titleLbl.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         titleLbl.setText("Gestió del parc Univeylandia");
 
+        clientsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/clients_small.png"))); // NOI18N
         clientsBtn.setText("Clients");
         clientsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +64,7 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        employeesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/employee_small.png"))); // NOI18N
         employeesBtn.setText("Treballadors");
         employeesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,7 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        atraccionsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/roller_small.png"))); // NOI18N
         atraccionsBtn.setText("Atraccions");
         atraccionsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +80,7 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        incidenciesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/incidence_small.png"))); // NOI18N
         incidenciesBtn.setText("Incidències");
         incidenciesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +88,7 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        tiquetsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ticket_small.png"))); // NOI18N
         tiquetsBtn.setText("Tiquets");
         tiquetsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +96,7 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        configBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/settings_small.png"))); // NOI18N
         configBtn.setText("Configuració");
         configBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,34 +104,44 @@ public class FrameInicial extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/logo_small.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(configBtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(titleLbl))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(clientsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(employeesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(atraccionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(incidenciesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tiquetsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(60, 60, 60))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(configBtn)
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(titleLbl)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(clientsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(employeesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(atraccionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(incidenciesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tiquetsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(108, 108, 108)))
+                        .addGap(0, 50, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleLbl)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clientsBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(employeesBtn)
@@ -222,6 +239,7 @@ public class FrameInicial extends javax.swing.JFrame {
     private javax.swing.JButton configBtn;
     private javax.swing.JButton employeesBtn;
     private javax.swing.JButton incidenciesBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton tiquetsBtn;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
