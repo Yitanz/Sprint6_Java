@@ -23,7 +23,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
-        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect());
+        MetodesGenerals.loadTable(resultTable, Atraccio.getQuerySelect(), showBtn, editBtn, deleteBtn);
     }
 
     /**
@@ -41,6 +41,9 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
+        showBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Univeylandia Parc - Atraccions");
@@ -70,6 +73,11 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
             }
         ));
         resultTable.getTableHeader().setReorderingAllowed(false);
+        resultTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(resultTable);
 
         backBtn.setText("Enrere");
@@ -78,6 +86,12 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
                 backBtnActionPerformed(evt);
             }
         });
+
+        showBtn.setText("Mostrar");
+
+        editBtn.setText("Modificar");
+
+        deleteBtn.setText("Eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +106,12 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                         .addComponent(addBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(showBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -111,7 +130,11 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(showBtn)
+                    .addComponent(editBtn)
+                    .addComponent(deleteBtn))
                 .addContainerGap())
         );
 
@@ -136,6 +159,12 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
         String keyword = "(?i)"+filterField.getText();
         MetodesGenerals.filterTable(resultTable, keyword);
     }//GEN-LAST:event_filterFieldKeyReleased
+
+    private void resultTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTableMouseClicked
+        showBtn.setEnabled(true);
+        editBtn.setEnabled(true);
+        deleteBtn.setEnabled(true);
+    }//GEN-LAST:event_resultTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -175,9 +204,12 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton editBtn;
     private javax.swing.JTextField filterField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable resultTable;
+    private javax.swing.JButton showBtn;
     // End of variables declaration//GEN-END:variables
 }

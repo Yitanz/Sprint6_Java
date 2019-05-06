@@ -23,7 +23,7 @@ public class MetodesGenerals {
 
     static DefaultTableModel model;
 
-    /**
+/**
      * Mètode auxiliar que rep un JTable i un String de query i genera una taula
      * de forma dinàmica.
      *
@@ -31,15 +31,23 @@ public class MetodesGenerals {
      * @param query
      *
      * @author Evaldas Casas
+     * @param showBtn
+     * @param editBtn
+     * @param deleteBtn
      */
-    public static void loadTable(JTable resultTable, String query) {
+    public static void loadTable(JTable resultTable, String query, JButton showBtn, JButton editBtn, JButton deleteBtn) {
         try {
-            ArrayList columnNames = new ArrayList();
+
+            model = new DefaultTableModel() {
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
             
-            JButton show = new JButton();
-            JButton edit = new JButton();
-            JButton delete = new JButton();
+            ArrayList columnNames = new ArrayList();
+
             connexio = new DBConnection();
+
             stmt = connexio.getConnection().createStatement();
 
             rs = stmt.executeQuery(query);
@@ -56,31 +64,36 @@ public class MetodesGenerals {
             }
 
             /* Generar taula */
-            model = new DefaultTableModel();
             resultTable.setModel(model);
 
             for (int i = 0; i < columnNames.size(); i++) {
                 model.addColumn(columnNames.get(i));
             }
-            model.addColumn("Mostrar");
-            model.addColumn("Editar");
-            model.addColumn("Eliminar");
 
             /* mostrar les dades en la taula despres d'haver-les guardat en un Objecte[] */
             while (rs.next()) {
                 Object[] row = new Object[columnCount];
 
                 for (int i = 0; i < columnCount; ++i) {
+                    System.out.println(columnCount);
                     row[i] = rs.getObject(i + 1);
                 }
                 model.addRow(row);
             }
 
-            connexio.disconnect();
-            rs.close();
+            showBtn.setEnabled(false);
+            editBtn.setEnabled(false);
+            deleteBtn.setEnabled(false);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                connexio.disconnect();
+                rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
