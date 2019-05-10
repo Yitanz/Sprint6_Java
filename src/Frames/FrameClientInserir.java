@@ -2,7 +2,7 @@ package Frames;
 
 import Auxiliar.MetodesGenerals;
 import Classes.Client;
-import Classes.MetodesClient;
+import Metodes.MetodesClient;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
