@@ -292,7 +292,7 @@ public class FrameAtraccionsModificar extends javax.swing.JFrame {
 
             if (name.isEmpty() || date.isEmpty() || minField.getText().isEmpty()
                     || maxField.getText().isEmpty() || accessibilityField.getSelectedIndex() == -1
-                    || expressField.getSelectedIndex() == -1 || desc.isEmpty()) {
+                    || expressField.getSelectedIndex() == -1 || desc.isEmpty() || min > max) {
                 JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
             } else {
                 Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);

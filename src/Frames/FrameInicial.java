@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frames;
 
 import java.io.IOException;
@@ -189,7 +184,10 @@ public class FrameInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_tiquetsBtnActionPerformed
 
     private void clientsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsBtnActionPerformed
-        // TODO add your handling code here:
+        FrameClientsInicial fci = new FrameClientsInicial();
+        this.setVisible(false);
+        fci.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_clientsBtnActionPerformed
 
     private void employeesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesBtnActionPerformed
@@ -197,8 +195,6 @@ public class FrameInicial extends javax.swing.JFrame {
         this.setVisible(false);
         fai.setVisible(true);
         this.dispose();
-
-        // TODO add your handling code here:
     }//GEN-LAST:event_employeesBtnActionPerformed
 
     /**

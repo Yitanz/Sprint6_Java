@@ -21,6 +21,9 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
         carregarGUI();
     }
 
+    /**
+     * Carrega la interfície gràfica del frame.
+     */
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
@@ -252,7 +255,7 @@ public class FrameAtraccionsInserir extends javax.swing.JFrame {
 
             if (name.isEmpty() || date.isEmpty() || minField.getText().isEmpty()
                     || maxField.getText().isEmpty() || accessibilityField.getSelectedIndex() == -1
-                    || expressField.getSelectedIndex() == -1 || desc.isEmpty()) {
+                    || expressField.getSelectedIndex() == -1 || desc.isEmpty() || min > max) {
                 JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
             } else {
                 Atraccio atr = new Atraccio(name, type, date, min, max, accessibility, express, desc);
