@@ -23,7 +23,7 @@ public class FrameInicial extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
@@ -178,7 +178,10 @@ public class FrameInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_atraccionsBtnActionPerformed
 
     private void incidenciesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incidenciesBtnActionPerformed
-        // TODO add your handling code here:
+        FrameIncidenciaInicial fii = new FrameIncidenciaInicial();
+        this.setVisible(false);
+        fii.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_incidenciesBtnActionPerformed
 
     private void tiquetsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiquetsBtnActionPerformed
