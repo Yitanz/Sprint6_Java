@@ -10,7 +10,7 @@ import Auxiliar.AES;
 
 public class DBConnection {
 
-    static Connection conn = null;                                                                         // Variable per la conexio de tipus Connection
+    static Connection conn = null;                                                                         // Variable per la connexio de tipus Connection
     static final String DB_DRV = "com.mysql.jdbc.Driver";                                           // Variable per igualar el driver de la DB
     static String error = "";
     public DBConnection() {
@@ -19,18 +19,18 @@ public class DBConnection {
             String DB_USER = carregarConf()[2];                                                     // Variable per igualar el usuari de la DB
             String DB_PASSWD = carregarConf()[3];                                                   // Variable per igualar la contrasenya de la DB
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);                         // Crear la variable per la conexio amb la DB
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);                         // Crear la variable per la connexio amb la DB
         } catch (Exception ex) {
             System.out.println(ex.getMessage());                                                    // Mostrar error si no es conecta
             error = ex.getMessage();
         }
     }
 
-    public static Connection getConnection() {                                                             // Metode per cridar a la conexio
+    public static Connection getConnection() {                                                             // Metode per cridar a la connexio
         return conn;
     }
 
-    public static void disconnect() {                                                                      // Metode per desconectar la conexio
+    public static void disconnect() {                                                                      // Metode per desconectar la connexio
         try {
             conn.close();
         } catch (Exception ex) {
@@ -44,7 +44,7 @@ public class DBConnection {
     
     public static String [] carregarConf() throws Exception{
         final String secretKey = "ssssssssssssssssssssssssas?";
-        BufferedReader saveFile= new BufferedReader(new FileReader(FrameConfiguracio.directoriConfig + FrameConfiguracio.arxiuConfig));
+        BufferedReader saveFile= new BufferedReader(new FileReader(FrameConfiguracio.currentDirectory + FrameConfiguracio.directoriConfig + FrameConfiguracio.arxiuConfig));
         String host = saveFile.readLine(); 
         String db = saveFile.readLine();
         String user = saveFile.readLine();

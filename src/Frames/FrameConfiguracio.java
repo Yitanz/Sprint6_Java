@@ -26,35 +26,40 @@ import Auxiliar.AES;
  * @author alumne
  */
 public class FrameConfiguracio extends javax.swing.JFrame {
-    public static final String directoriConfig = "config/";
+
+    public static final String directoriConfig = "/config/";
     public static final String arxiuConfig = "conf.txt";
     final String secretKey = "ssssssssssssssssssssssssas?";
-    
+
+    public static String currentDirectory = System.getProperty("user.dir");
+
     /**
      * Creates new form FrameConfiguracio
      */
     public FrameConfiguracio() throws IOException {
         initComponents();
-        carregarGUI();       
+        carregarGUI();
     }
-    
+
     private void carregarGUI() throws IOException {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
-        /** CARREGAR DADES CONFIG */
-        try{
-            BufferedReader saveFile= new BufferedReader(new FileReader(directoriConfig + arxiuConfig));
-            hostField.setText(saveFile.readLine()); 
+        /**
+         * CARREGAR DADES CONFIG
+         */
+        try {
+            BufferedReader saveFile = new BufferedReader(new FileReader(currentDirectory + directoriConfig + arxiuConfig));
+            hostField.setText(saveFile.readLine());
             databaseField.setText(saveFile.readLine());
             userField.setText(saveFile.readLine());
             passwordField.setText(AES.decrypt(saveFile.readLine(), secretKey));
             saveFile.close();
-        }catch (FileNotFoundException e){
-            System.out.println ("Error al carregar la configuració: " + e);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al carregar la configuració: " + e);
         }
-        
+
     }
 
     /**
@@ -187,17 +192,29 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        new File("config").mkdirs();
+
+        System.out.println(currentDirectory + directoriConfig);
+
+        new File(currentDirectory + directoriConfig).mkdir();
+
         String emptyFields = "\n";
-        try{
-            if(hostField.getText().isEmpty() || databaseField.getText().isEmpty() || userField.getText().isEmpty() || passwordField.getText().isEmpty()){
-                if(hostField.getText().isEmpty()){ emptyFields = emptyFields + "- Host\n";}
-                if (databaseField.getText().isEmpty()){emptyFields = emptyFields + "- Base de dades\n";}
-                if (userField.getText().isEmpty()){emptyFields = emptyFields + "- Usuari\n";}
-                if (passwordField.getText().isEmpty()){emptyFields = emptyFields + "- Contrasenya\n";}
+        try {
+            if (hostField.getText().isEmpty() || databaseField.getText().isEmpty() || userField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+                if (hostField.getText().isEmpty()) {
+                    emptyFields = emptyFields + "- Host\n";
+                }
+                if (databaseField.getText().isEmpty()) {
+                    emptyFields = emptyFields + "- Base de dades\n";
+                }
+                if (userField.getText().isEmpty()) {
+                    emptyFields = emptyFields + "- Usuari\n";
+                }
+                if (passwordField.getText().isEmpty()) {
+                    emptyFields = emptyFields + "- Contrasenya\n";
+                }
                 JOptionPane.showMessageDialog(this, "Hi han camps sense omplir: " + emptyFields);
-            }else{
-                FileWriter saveFile = new FileWriter(directoriConfig + arxiuConfig);
+            } else {
+                FileWriter saveFile = new FileWriter(currentDirectory + directoriConfig + arxiuConfig);
                 saveFile.write(hostField.getText() + "\n");
                 saveFile.write(databaseField.getText() + "\n");
                 saveFile.write(userField.getText() + "\n");
@@ -205,26 +222,36 @@ public class FrameConfiguracio extends javax.swing.JFrame {
                 saveFile.close();
                 JOptionPane.showMessageDialog(this, "Configuració guardada correctament");
             }
-         }catch (Exception e){
-            if(!Files.exists(Paths.get(directoriConfig))) { JOptionPane.showMessageDialog(this, "No s'ha pogur crear el directori de configuració");}
-            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {JOptionPane.showMessageDialog(this, "No s'ha pogur crear l'arxiu de configuració");}
-            else if(!Files.isWritable(Paths.get(directoriConfig + arxiuConfig))){JOptionPane.showMessageDialog(this, "No es tenen permisos d'escriptura sobre l'arxiu de configuració");}
-            else{JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);} 
-         } 
+        } catch (Exception e) {
+            if (!Files.exists(Paths.get(currentDirectory + directoriConfig))) {
+                JOptionPane.showMessageDialog(this, "No s'ha pogur crear el directori de configuració");
+            } else if (!Files.exists(Paths.get(currentDirectory + directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No s'ha pogur crear l'arxiu de configuració");
+            } else if (!Files.isWritable(Paths.get(currentDirectory + directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No es tenen permisos d'escriptura sobre l'arxiu de configuració");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar la configuració: " + e);
+            }
+        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void provarConnexioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provarConnexioButtonActionPerformed
         DBConnection connexio = new DBConnection();
         Statement statement = null;
-        try{    
+        try {
             statement = connexio.getConnection().createStatement();
             JOptionPane.showMessageDialog(this, "Connexió correcta");
-        }catch (Exception e){
-            if(!Files.exists(Paths.get(directoriConfig))) { JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");}
-            else if (!Files.exists(Paths.get(directoriConfig + arxiuConfig))) {JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");}
-            else if(!Files.isReadable(Paths.get(directoriConfig + arxiuConfig))){JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");}
-            else{JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + connexio.getError());}
-        }finally{
+        } catch (Exception e) {
+            if (!Files.exists(Paths.get(currentDirectory + directoriConfig))) {
+                JOptionPane.showMessageDialog(this, "No existeix el directori de configuració");
+            } else if (!Files.exists(Paths.get(currentDirectory + directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No existeix l'arxiu de configuració");
+            } else if (!Files.isReadable(Paths.get(currentDirectory + directoriConfig + arxiuConfig))) {
+                JOptionPane.showMessageDialog(this, "No es tenen permisos de lectura sobre l'arxiu de configuració");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al realitzar la connexió: " + connexio.getError());
+            }
+        } finally {
             try {
                 statement.close();
                 connexio.disconnect();
