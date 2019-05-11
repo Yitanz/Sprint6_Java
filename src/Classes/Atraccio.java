@@ -23,15 +23,11 @@ public class Atraccio {
             + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
      */
     
-    private static String queryShow = "SELECT a.nom_atraccio, ta.tipus, a.data_inauguracio, a.altura_min, "
-            + "a.altura_max, a.accessibilitat, a.acces_express, a.descripcio "
-            + "FROM atraccions a JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id WHERE a.nom_atraccio = ?";
+    private static String queryShow = "SELECT a.nom_atraccio, ta.tipus, a.data_inauguracio, a.altura_min, a.altura_max, a.accessibilitat, a.acces_express, a.descripcio FROM atraccions a JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id WHERE a.nom_atraccio = ?";
 
-    private static String querySelect = "SELECT a.nom_atraccio, ta.tipus FROM atraccions a "
-            + "INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
+    private static String querySelect = "SELECT a.nom_atraccio, ta.tipus FROM atraccions a INNER JOIN tipus_atraccions ta ON a.tipus_atraccio = ta.id ORDER BY a.id;";
 
-    private static String queryUpdate = "UPDATE atraccions SET nom_atraccio = ?, tipus_atraccio = ?, data_inauguracio = ?, altura_min = ?, "
-            + "altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE nom_atraccio = ? ;";
+    private static String queryUpdate = "UPDATE atraccions SET nom_atraccio = ?, tipus_atraccio = ?, data_inauguracio = ?, altura_min = ?, altura_max = ?, accessibilitat = ?, acces_express = ?, descripcio = ? WHERE nom_atraccio = ? ;";
 
     private static String queryDelete = "DELETE FROM atraccions WHERE nom_atraccio = ? ;";
 
