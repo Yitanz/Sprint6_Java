@@ -50,11 +50,37 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
         try{
             while (empleats.next()){
                 //Rellenamos elcombobox
-                EmpleatsCB.addItem(empleats.getNString("nom") + " " + empleats.getNString("cognom1"));
+                EmpleatsCB.addItem(empleats.getNString("nom") + " " + empleats.getNString("cognom1") + " - " + empleats.getNString("email"));
             }
         }catch(SQLException e){
             System.out.println(e);
         }
+
+    }
+    
+    public FrameIncidenciaModificar(String id, String titol, String descripcio, String id_prioritat, String id_estat, String usuari_assignat) {
+
+        initComponents();
+        carregarGUI();
+
+        this.id = id;
+        this.titol = titol;
+        this.descripcio = descripcio;
+        this.id_prioritat = id_prioritat;
+        this.id_estat = id_estat;
+
+        incidentName.setText(titol);
+        descField.setText(descripcio);
+
+        try{
+            while (empleats.next()){
+                //Rellenamos elcombobox
+                EmpleatsCB.addItem(empleats.getNString("nom") + " " + empleats.getNString("cognom1") + " - " + empleats.getNString("email"));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        EmpleatsCB.setSelectedItem(usuari_assignat);
 
     }
 
@@ -291,124 +317,6 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
                         MetodesIncidencia.updateIncidentDades(id, titol, descripcio, state, priority, id_empleat_assignat);   
                     }
                 }
-                /*
-                if (prioritat == "Urgent") {
-                    if (estat == "To-do") {
-                        int priority = 3;
-                        int state = 1;
-                        
-                        MetodesIncidencia.updateIncidentDades(id, titol, descripcio, state, priority, id_empleat_assignat);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "In progress") {
-                        int priority = 3;
-                        int state = 2;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "Done") {
-                        int priority = 3;
-                        int state = 3;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                    }
-                }
-
-                if (prioritat == "Normal") {
-                    if (estat == "To-do") {
-                        int priority = 2;
-                        int state = 1;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                    if (estat == "In progress") {
-                        int priority = 2;
-                        int state = 2;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "Done") {
-                        int priority = 2;
-                        int state = 3;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-
-                }
-                if (prioritat == "Baixa") {
-                    if (estat == "To-do") {
-                        int priority = 1;
-                        int state = 1;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "In progress") {
-                        int priority = 1;
-                        int state = 2;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                    if (estat == "Done") {
-                        int priority = 1;
-                        int state = 3;
-
-                        Incidencia updateIncident = new Incidencia(id, titol, descripcio, state, priority);
-                        MetodesIncidencia.updateIncident(updateIncident);
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                }
-                */
             
             FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
             this.setVisible(false);

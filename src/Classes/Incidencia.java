@@ -21,6 +21,10 @@ public class Incidencia {
     private String resultat;
     private String nom_prioritat;
     private String nom_estat;
+    private String nom_usuari_assignat;
+    private String email_usuari_assignat;
+
+    
    
 
     public Incidencia() {
@@ -186,6 +190,22 @@ public class Incidencia {
 
     public String getNom_estat() {
         return nom_estat;
+    }
+    
+    public String getNom_usuari_assignat() {
+        return nom_usuari_assignat;
+    }
+
+    public void setNom_usuari_assignat(String nom_usuari_assignat) {
+        this.nom_usuari_assignat = nom_usuari_assignat;
+    }
+
+    public String getEmail_usuari_assignat() {
+        return email_usuari_assignat;
+    }
+
+    public void setEmail_usuari_assignat(String email_usuari_assignat) {
+        this.email_usuari_assignat = email_usuari_assignat;
     }
     
 }

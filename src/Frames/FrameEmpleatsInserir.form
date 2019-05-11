@@ -33,25 +33,21 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="EmpleatNom" alignment="1" max="32767" attributes="0"/>
                   <Component id="EmpleatAdreca" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="submitBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="CognomEmpleat" alignment="0" max="32767" attributes="0"/>
-                  <Component id="CognomEmpleat1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatCorreu" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmpleatNaixement" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatCiutat" alignment="1" max="32767" attributes="0"/>
                   <Component id="EmpleatProvincia" alignment="0" max="32767" attributes="0"/>
-                  <Component id="EmpleatCiutat1" alignment="1" max="32767" attributes="0"/>
                   <Component id="EmpleatCodiPostal" alignment="0" max="32767" attributes="0"/>
-                  <Component id="EmpelatTipusDoc" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmpleatNumeroDoc" alignment="1" max="32767" attributes="0"/>
                   <Component id="EmpleatSexe" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmpleatTelefon" alignment="1" max="32767" attributes="0"/>
                   <Component id="EmpleatNomina" alignment="0" max="32767" attributes="0"/>
                   <Component id="EmpleatIBAN" alignment="0" max="32767" attributes="0"/>
-                  <Component id="EmpleatTelefon1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatCSS" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatEspecialitat" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatCarrec" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatContracteInici" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatContracteFi" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -71,10 +67,21 @@
                           <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="168" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="EmpleatIBAN1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                      <Component id="submitBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="EmpleatCognom" alignment="0" max="32767" attributes="0"/>
+                  <Component id="EmpleatTipusDoc" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -91,12 +98,12 @@
               <Component id="EmpleatNom" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="CognomEmpleat" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Component id="EmpleatCognom" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="CognomEmpleat1" min="-2" max="-2" attributes="0"/>
+              <Component id="EmpleatCorreu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -108,53 +115,66 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="EmpleatCiutat1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Component id="EmpleatCiutat" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatProvincia" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatCodiPostal" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="EmpelatTipusDoc" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="EmpleatTipusDoc" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatNumeroDoc" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatSexe" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatTelefon" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="EmpleatTelefon1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Component id="EmpleatCSS" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatNomina" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="EmpleatIBAN" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="EmpleatIBAN1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="EmpleatEspecialitat" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="EmpleatCarrec" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="EmpleatContracteInici" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="EmpleatContracteFi" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="backBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="submitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="backBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -165,24 +185,24 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Cantarell" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Empleat - Crear"/>
+        <Property name="text" type="java.lang.String" value="Treballador - Crear"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nom empleat"/>
+        <Property name="text" type="java.lang.String" value="Nom"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatNom">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cognom Empleat"/>
+        <Property name="text" type="java.lang.String" value="Cognom"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Correu electronic"/>
+        <Property name="text" type="java.lang.String" value="Correu electr&#xf2;nic"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -214,6 +234,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="backBtn">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/cancel_small.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Enrere"/>
       </Properties>
       <Events>
@@ -222,18 +245,22 @@
     </Component>
     <Component class="javax.swing.JButton" name="submitBtn">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/ok_small.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Acceptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitBtnActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="CognomEmpleat">
-    </Component>
-    <Component class="javax.swing.JTextField" name="CognomEmpleat1">
+    <Component class="javax.swing.JTextField" name="EmpleatCorreu">
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="EmpleatNaixement">
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatProvincia">
     </Component>
-    <Component class="javax.swing.JTextField" name="EmpleatCiutat1">
+    <Component class="javax.swing.JTextField" name="EmpleatCiutat">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -242,24 +269,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatCodiPostal">
     </Component>
-    <Component class="javax.swing.JComboBox" name="EmpelatTipusDoc">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Numero Document"/>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero Document"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatNumeroDoc">
@@ -272,11 +284,9 @@
     <Component class="javax.swing.JComboBox" name="EmpleatSexe">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Home"/>
+            <StringItem index="1" value="Done"/>
           </StringArray>
         </Property>
       </Properties>
@@ -286,7 +296,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Telefon"/>
+        <Property name="text" type="java.lang.String" value="Tel&#xe8;fon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatTelefon">
@@ -298,7 +308,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Numero de nomina"/>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de n&#xf2;mina"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatNomina">
@@ -310,14 +320,59 @@
     </Component>
     <Component class="javax.swing.JTextField" name="EmpleatIBAN">
     </Component>
-    <Component class="javax.swing.JTextField" name="EmpleatTelefon1">
+    <Component class="javax.swing.JTextField" name="EmpleatCSS">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
         <Property name="text" type="java.lang.String" value="Especialitat"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="EmpleatIBAN1">
+    <Component class="javax.swing.JTextField" name="EmpleatEspecialitat">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel18">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xe0;rrec"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="EmpleatCarrec">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel19">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data inici contracte"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="EmpleatContracteInici">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel20">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data fi contracte"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="EmpleatContracteFi">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="EmpleatCognom">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="EmpleatTipusDoc">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="DNI"/>
+            <StringItem index="1" value="NIE"/>
+            <StringItem index="2" value="NIF"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

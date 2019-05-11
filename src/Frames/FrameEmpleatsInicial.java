@@ -1,10 +1,15 @@
 package Frames;
 
+import Auxiliar.MetodesGenerals;
+import Auxiliar.SharedData;
+import Classes.Empleat;
+import Metodes.MetodesEmpleat;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
  *
- * @author Grup 2: Evaldas Casas
+ * @author Grup 1: Ivan Morte
  */
 public class FrameEmpleatsInicial extends javax.swing.JFrame {
 
@@ -15,12 +20,23 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        resultTable.setDefaultEditor(Object.class, null);
+        carregarTaula();
+    }
+    
+        private void carregarTaula() {
+        /* Per defecte desactivar els botons */
+        showBtn.setEnabled(false);
+        editBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+
+        MetodesGenerals.loadTable(resultTable, Empleat.getQuerySelect());
     }
 
     /**
@@ -38,16 +54,29 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
+        showBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
-        jLabel1.setText("Empleats");
+        jLabel1.setText("Treballadors");
 
+        addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/plus_small.png"))); // NOI18N
         addBtn.setText("Afegir");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
+            }
+        });
+
+        filterField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filterFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterFieldKeyReleased(evt);
             }
         });
 
@@ -60,12 +89,42 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
             }
         ));
         resultTable.getTableHeader().setReorderingAllowed(false);
+        resultTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(resultTable);
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
+            }
+        });
+
+        showBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eye_small.png"))); // NOI18N
+        showBtn.setText("Mostrar");
+        showBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBtnActionPerformed(evt);
+            }
+        });
+
+        editBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/edit_small.png"))); // NOI18N
+        editBtn.setText("Modificar");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
+
+        deleteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/delete_small.png"))); // NOI18N
+        deleteBtn.setText("Eliminar");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
             }
         });
 
@@ -79,14 +138,17 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
                     .addComponent(filterField)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                         .addComponent(addBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(showBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,10 +160,14 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
                     .addComponent(addBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backBtn)
+                    .addComponent(showBtn)
+                    .addComponent(editBtn)
+                    .addComponent(deleteBtn))
                 .addContainerGap())
         );
 
@@ -121,6 +187,81 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
         fi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
+        int columna = 2;
+
+        int fila = resultTable.getSelectedRow();
+
+        String email = resultTable.getModel().getValueAt(fila, columna).toString();
+
+        SharedData.setEmailEmpleat(email);
+
+        System.out.println(email);
+
+        FrameEmpleatsMostrar fam = new FrameEmpleatsMostrar();
+        this.setVisible(false);
+        fam.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_showBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        int columna = 2;
+
+        int fila = resultTable.getSelectedRow();
+
+        String email = resultTable.getModel().getValueAt(fila, columna).toString();
+
+        SharedData.setEmailEmpleat(email);
+
+        System.out.println(email);
+
+        FrameEmpleatsModificar fi = new FrameEmpleatsModificar();
+        this.setVisible(false);
+        fi.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        int columna = 2;
+
+        int fila = resultTable.getSelectedRow();
+
+        String email = resultTable.getModel().getValueAt(fila, columna).toString();
+        //String codiss = resultTable.getModel().getValueAt(fila, columna).toString();
+
+        
+        int input = JOptionPane.showConfirmDialog(null,
+                "Estàs segur de voler eliminar el registre: " + email + "?", "Eliminar atracció", JOptionPane.OK_CANCEL_OPTION);
+
+        if (input == 0) {
+            int rowsInserted = MetodesEmpleat.ElEmpleat(email, Empleat.getQueryDel());
+          //  int rowsInserted2 = MetodesEmpleat.ElEmpleat(email, Empleat.queryDadesEmp());
+
+            
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "S'ha eliminat el registre: " + email);
+                carregarTaula();
+            }
+        }        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void resultTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTableMouseClicked
+        showBtn.setEnabled(true);
+        editBtn.setEnabled(true);
+        deleteBtn.setEnabled(true);
+    }//GEN-LAST:event_resultTableMouseClicked
+
+    private void filterFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filterFieldKeyPressed
+
+    private void filterFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterFieldKeyReleased
+        String keyword = "(?i)" + filterField.getText();
+        MetodesGenerals.filterTable(resultTable, keyword);
+    }//GEN-LAST:event_filterFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -161,9 +302,12 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton editBtn;
     private javax.swing.JTextField filterField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable resultTable;
+    private javax.swing.JButton showBtn;
     // End of variables declaration//GEN-END:variables
 }

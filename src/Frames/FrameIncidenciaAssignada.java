@@ -18,13 +18,13 @@ import Frames.FrameAtraccionsModificar;
  *
  * @author alumne
  */
-public class FrameIncidenciaInicial extends javax.swing.JFrame {
-    String sql = "select incidencies.id, titol, descripcio, nom_prioritat, nom_estat from incidencies, estat_incidencies, tipus_prioritat where id_prioritat=tipus_prioritat.id and estat_incidencies.id= id_estat and id_usuari_assignat is null";
+public class FrameIncidenciaAssignada extends javax.swing.JFrame {
+    private String sql = "select incidencies.id, titol, descripcio, nom_prioritat, nom_estat, users.nom, users.cognom1, users.email from incidencies, estat_incidencies, tipus_prioritat, users where users.id = incidencies.id_usuari_assignat and id_prioritat=tipus_prioritat.id and estat_incidencies.id= id_estat";
 
     /**
      * Creates new form FrameAtraccionsInicial
      */
-    public FrameIncidenciaInicial() {
+    public FrameIncidenciaAssignada() {
         initComponents();
         carregarGUI();
     }
@@ -34,8 +34,8 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
-        MetodesGenerals.loadTable(incidentTable,sql);
 
+        MetodesGenerals.loadTable(incidentTable,sql);
     }
 
     /**
@@ -55,12 +55,11 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         incidentDelete = new javax.swing.JButton();
         incidentUpdate = new javax.swing.JButton();
-        incidentDelete1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
-        jLabel1.setText("Incidències");
+        jLabel1.setText("Incidències - assignades");
 
         addBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/plus_small.png"))); // NOI18N
         addBtn.setText("Afegir");
@@ -111,14 +110,6 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
             }
         });
 
-        incidentDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eye_small.png"))); // NOI18N
-        incidentDelete1.setText("In. Assignades");
-        incidentDelete1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                incidentDelete1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,14 +120,12 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
                     .addComponent(filterField)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addComponent(addBtn))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(incidentUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(incidentDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(incidentDelete1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backBtn))
                     .addGroup(layout.createSequentialGroup()
@@ -159,8 +148,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn)
                     .addComponent(incidentDelete)
-                    .addComponent(incidentUpdate)
-                    .addComponent(incidentDelete1))
+                    .addComponent(incidentUpdate))
                 .addContainerGap())
         );
 
@@ -175,7 +163,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        FrameInicial fi = new FrameInicial();
+        FrameIncidenciaInicial fi = new FrameIncidenciaInicial();
         this.setVisible(false);
         fi.setVisible(true);
         this.dispose();
@@ -204,8 +192,10 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
                 descripcio = incidentTable.getValueAt(filaseleccionada, 2).toString();
                 id_prioritat = incidentTable.getValueAt(filaseleccionada, 3).toString();
                 id_estat = incidentTable.getValueAt(filaseleccionada, 4).toString();
+                String user_assignat = incidentTable.getValueAt(filaseleccionada, 5).toString() + " " + incidentTable.getValueAt(filaseleccionada, 6).toString() + " - " + incidentTable.getValueAt(filaseleccionada,7).toString();
+                System.out.println(user_assignat);
 
-                FrameIncidenciaModificar fi = new FrameIncidenciaModificar(id, titol, descripcio, id_prioritat, id_estat);
+                FrameIncidenciaModificar fi = new FrameIncidenciaModificar(id, titol, descripcio, id_prioritat, id_estat, user_assignat);
                 this.setVisible(false);
                 fi.setVisible(true);
                 this.dispose();
@@ -236,6 +226,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
 
                     MetodesIncidencia.deleteIncident(idIncidencia);
                     MetodesGenerals.loadTable(incidentTable,sql);
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Incidència no eliminada", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -248,14 +239,6 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
         String keyword = "(?i)" + filterField.getText();
         MetodesGenerals.filterTable(incidentTable, keyword);
     }//GEN-LAST:event_filterFieldKeyReleased
-
-    private void incidentDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incidentDelete1ActionPerformed
-        FrameIncidenciaAssignada inAssig = new FrameIncidenciaAssignada();
-        
-        this.setVisible(false);
-        inAssig.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_incidentDelete1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,21 +257,23 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameIncidenciaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIncidenciaAssignada.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameIncidenciaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIncidenciaAssignada.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameIncidenciaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIncidenciaAssignada.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameIncidenciaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIncidenciaAssignada.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameIncidenciaInicial().setVisible(true);
+                new FrameIncidenciaAssignada().setVisible(true);
             }
         });
     }
@@ -298,7 +283,6 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JTextField filterField;
     private javax.swing.JButton incidentDelete;
-    private javax.swing.JButton incidentDelete1;
     private javax.swing.JTable incidentTable;
     private javax.swing.JButton incidentUpdate;
     private javax.swing.JLabel jLabel1;

@@ -1,6 +1,12 @@
 package Frames;
 
+import Classes.Empleat;
+import Metodes.MetodesEmpleat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,12 +21,16 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         initComponents();
         carregarGUI();
     }
-    
+
     private void carregarGUI() {
         this.setSize(450, 350);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
+        EmpleatNaixement.setDateFormatString("yyy-MM-dd");
+        EmpleatContracteInici.setDateFormatString("yyy-MM-dd");
+        EmpleatContracteFi.setDateFormatString("yyy-MM-dd");
+
     }
 
     /**
@@ -46,14 +56,12 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         submitBtn = new javax.swing.JButton();
-        CognomEmpleat = new javax.swing.JTextField();
-        CognomEmpleat1 = new javax.swing.JTextField();
+        EmpleatCorreu = new javax.swing.JTextField();
         EmpleatNaixement = new com.toedter.calendar.JDateChooser();
         EmpleatProvincia = new javax.swing.JTextField();
-        EmpleatCiutat1 = new javax.swing.JTextField();
+        EmpleatCiutat = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         EmpleatCodiPostal = new javax.swing.JTextField();
-        EmpelatTipusDoc = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         EmpleatNumeroDoc = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -65,21 +73,30 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         EmpleatNomina = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         EmpleatIBAN = new javax.swing.JTextField();
-        EmpleatTelefon1 = new javax.swing.JTextField();
+        EmpleatCSS = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        EmpleatIBAN1 = new javax.swing.JTextField();
+        EmpleatEspecialitat = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        EmpleatCarrec = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        EmpleatContracteInici = new com.toedter.calendar.JDateChooser();
+        jLabel20 = new javax.swing.JLabel();
+        EmpleatContracteFi = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        EmpleatCognom = new javax.swing.JTextField();
+        EmpleatTipusDoc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Univeylandia Parc - Atraccions");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
-        jLabel1.setText("Empleat - Crear");
+        jLabel1.setText("Treballador - Crear");
 
-        jLabel2.setText("Nom empleat");
+        jLabel2.setText("Nom");
 
-        jLabel3.setText("Cognom Empleat");
+        jLabel3.setText("Cognom");
 
-        jLabel4.setText("Correu electronic");
+        jLabel4.setText("Correu electrònic");
 
         jLabel5.setText("Data de naixement");
 
@@ -91,6 +108,7 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
 
         jLabel9.setText("Codi Postal");
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancel_small.png"))); // NOI18N
         backBtn.setText("Enrere");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,27 +116,46 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ok_small.png"))); // NOI18N
         submitBtn.setText("Acceptar");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Tipus Document");
 
-        EmpelatTipusDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel11.setText("Numero Document");
+        jLabel11.setText("Número Document");
 
         jLabel12.setText("Sexe");
 
-        EmpleatSexe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        EmpleatSexe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Home", "Done" }));
 
-        jLabel13.setText("Telefon");
+        jLabel13.setText("Telèfon");
 
         jLabel14.setText("Codi de la seguretat social");
 
-        jLabel15.setText("Numero de nomina");
+        jLabel15.setText("Número de nòmina");
 
         jLabel16.setText("IBAN");
 
         jLabel17.setText("Especialitat");
+
+        jLabel18.setText("Càrrec");
+
+        jLabel19.setText("Data inici contracte");
+
+        jLabel20.setText("Data fi contracte");
+
+        jButton1.setText("Test");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        EmpleatTipusDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "NIE", "NIF" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,24 +166,21 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EmpleatNom, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EmpleatAdreca, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(submitBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(backBtn))
-                    .addComponent(CognomEmpleat)
-                    .addComponent(CognomEmpleat1)
+                    .addComponent(EmpleatCorreu)
                     .addComponent(EmpleatNaixement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpleatCiutat, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EmpleatProvincia)
-                    .addComponent(EmpleatCiutat1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EmpleatCodiPostal)
-                    .addComponent(EmpelatTipusDoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EmpleatNumeroDoc, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EmpleatSexe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EmpleatTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EmpleatNomina)
                     .addComponent(EmpleatIBAN)
-                    .addComponent(EmpleatTelefon1)
+                    .addComponent(EmpleatCSS)
+                    .addComponent(EmpleatEspecialitat)
+                    .addComponent(EmpleatCarrec)
+                    .addComponent(EmpleatContracteInici, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpleatContracteFi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -165,9 +199,19 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17))
-                        .addGap(0, 168, Short.MAX_VALUE))
-                    .addComponent(EmpleatIBAN1))
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel20))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addComponent(submitBtn)
+                        .addGap(7, 7, 7)
+                        .addComponent(backBtn))
+                    .addComponent(EmpleatCognom)
+                    .addComponent(EmpleatTipusDoc, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,12 +225,12 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
                 .addComponent(EmpleatNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CognomEmpleat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
+                .addComponent(EmpleatCognom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CognomEmpleat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmpleatCorreu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,52 +242,65 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmpleatCiutat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addComponent(EmpleatCiutat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel9)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatCodiPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EmpelatTipusDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpleatTipusDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatSexe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EmpleatTelefon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addComponent(EmpleatCSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatNomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EmpleatIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EmpleatIBAN1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpleatEspecialitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpleatCarrec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpleatContracteInici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpleatContracteFi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backBtn)
-                    .addComponent(submitBtn))
-                .addContainerGap())
+                    .addComponent(jButton1)
+                    .addComponent(submitBtn)
+                    .addComponent(backBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,6 +312,94 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         fai.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        Empleat emp = new Empleat();
+        emp.setNom(EmpleatNom.getText());
+        emp.setCognom1(EmpleatCognom.getText());
+        emp.setEmail(EmpleatCorreu.getText());
+        //jclanedar
+
+        DateFormat df = new SimpleDateFormat("yyy-MM-dd");
+        String date = ((JTextField) EmpleatNaixement.getDateEditor().getUiComponent()).getText();
+
+        emp.setData_naixement(date);
+        emp.setAdreca(EmpleatAdreca.getText());
+        emp.setCiutat(EmpleatCiutat.getText());
+        emp.setProvincia(EmpleatProvincia.getText());
+        emp.setCodi_postal(EmpleatCodiPostal.getText());
+        //el bon combobox
+        String tipus_doc = (String) EmpleatTipusDoc.getSelectedItem();
+        emp.setTipus_document(tipus_doc);
+        emp.setNumero_document(EmpleatNumeroDoc.getText());
+        //el 2 combobox 
+        String tipus_sexe = (String) EmpleatSexe.getSelectedItem();
+        emp.setSexe(tipus_sexe);
+        emp.setTelefon(EmpleatTelefon.getText());
+        //dades empleat
+        emp.setCodi_seg_social(EmpleatCSS.getText());
+        emp.setNum_nomina(EmpleatNomina.getText());
+        emp.setIBAN(EmpleatIBAN.getText());
+        emp.setEspecialitat(EmpleatEspecialitat.getText());
+        emp.setCarrec(EmpleatCarrec.getText());
+        //mes jcalendar
+
+        String dataContracteInici = ((JTextField) EmpleatContracteInici.getDateEditor().getUiComponent()).getText();
+
+        emp.setData_inici_contracte(dataContracteInici);
+        //un altra jclaneder perque contra mes millor i mes feliz tots
+        String dataContracteFi = ((JTextField) EmpleatContracteFi.getDateEditor().getUiComponent()).getText();
+
+        emp.setData_fi_contracte(dataContracteFi);
+
+        String test1 = "$2y$10$4VIy8LE9TOuRTPcq0A69vOQwWrm/75QF1xzpq/DqjwcIt7kSZctRq";
+        emp.setPassword(test1);
+        emp.setId_dades_empleat(1);
+        emp.setId_rol(3);
+        emp.setId_horari(1);
+        
+        String data_contracte_inici = ((JTextField) EmpleatContracteInici.getDateEditor().getUiComponent()).getText();
+        System.out.println(data_contracte_inici);
+        String data_contracte_fi = ((JTextField) EmpleatContracteFi.getDateEditor().getUiComponent()).getText();
+        System.out.println(data_contracte_fi);
+
+        String date22 = ((JTextField) EmpleatNaixement.getDateEditor().getUiComponent()).getText();
+        if (EmpleatNom.getText().isEmpty() || EmpleatCorreu.getText().isEmpty() || EmpleatCognom.getText().isEmpty() || date22.isEmpty() || EmpleatAdreca.getText().isEmpty() || EmpleatCiutat.getText().isEmpty() || EmpleatProvincia.getText().isEmpty() || EmpleatCodiPostal.getText().isEmpty() || EmpleatNumeroDoc.getText().isEmpty() || EmpleatTelefon.getText().isEmpty() || EmpleatCSS.getText().isEmpty() || EmpleatNomina.getText().isEmpty() || EmpleatIBAN.getText().isEmpty() || EmpleatEspecialitat.getText().isEmpty() || EmpleatCarrec.getText().isEmpty() || data_contracte_inici.isEmpty() || data_contracte_fi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+        } else {
+            int rowsInserted = MetodesEmpleat.RegistrarEmpleat(emp);
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "S'ha creat el registre!");
+                FrameEmpleatsInicial fai = new FrameEmpleatsInicial();
+                this.setVisible(false);
+                fai.setVisible(true);
+                this.dispose();
+            }
+        }
+
+        /* Tornar a la finestra anterior */
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        EmpleatNom.setText("Ivan");
+        EmpleatCognom.setText("Morte");
+        EmpleatCorreu.setText("ivanmorte3@iesmontsia.org");
+        EmpleatAdreca.setText("adreca1");
+        EmpleatCiutat.setText("ciutat1");
+        EmpleatProvincia.setText("provincia1");
+        EmpleatCodiPostal.setText("45896");
+        EmpleatNumeroDoc.setText("787874");
+        EmpleatTelefon.setText("998999998");
+        EmpleatCSS.setText("455454545");
+        EmpleatNomina.setText("5454");
+        EmpleatIBAN.setText("2");
+        EmpleatEspecialitat.setText("suicidi");
+        EmpleatCarrec.setText("sdada");
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,7 +429,6 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -294,15 +438,18 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CognomEmpleat;
-    private javax.swing.JTextField CognomEmpleat1;
-    private javax.swing.JComboBox<String> EmpelatTipusDoc;
     private javax.swing.JTextField EmpleatAdreca;
     private javax.swing.JTextField EmpleatAdreca1;
-    private javax.swing.JTextField EmpleatCiutat1;
+    private javax.swing.JTextField EmpleatCSS;
+    private javax.swing.JTextField EmpleatCarrec;
+    private javax.swing.JTextField EmpleatCiutat;
     private javax.swing.JTextField EmpleatCodiPostal;
+    private javax.swing.JTextField EmpleatCognom;
+    private com.toedter.calendar.JDateChooser EmpleatContracteFi;
+    private com.toedter.calendar.JDateChooser EmpleatContracteInici;
+    private javax.swing.JTextField EmpleatCorreu;
+    private javax.swing.JTextField EmpleatEspecialitat;
     private javax.swing.JTextField EmpleatIBAN;
-    private javax.swing.JTextField EmpleatIBAN1;
     private com.toedter.calendar.JDateChooser EmpleatNaixement;
     private javax.swing.JTextField EmpleatNom;
     private javax.swing.JTextField EmpleatNomina;
@@ -310,8 +457,9 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
     private javax.swing.JTextField EmpleatProvincia;
     private javax.swing.JComboBox<String> EmpleatSexe;
     private javax.swing.JTextField EmpleatTelefon;
-    private javax.swing.JTextField EmpleatTelefon1;
+    private javax.swing.JComboBox<String> EmpleatTipusDoc;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -321,7 +469,10 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
