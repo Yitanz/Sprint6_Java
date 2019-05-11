@@ -3,7 +3,7 @@ package Frames;
 import Auxiliar.MetodesGenerals;
 import Auxiliar.SharedData;
 import Classes.Client;
-import Classes.MetodesClient;
+import Metodes.MetodesClient;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
