@@ -112,7 +112,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
         });
 
         incidentDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eye_small.png"))); // NOI18N
-        incidentDelete1.setText("In. Assignades");
+        incidentDelete1.setText("Assignades");
         incidentDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 incidentDelete1ActionPerformed(evt);
