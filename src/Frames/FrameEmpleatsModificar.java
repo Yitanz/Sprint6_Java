@@ -28,7 +28,7 @@ public class FrameEmpleatsModificar extends javax.swing.JFrame {
     }
     
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -130,7 +130,7 @@ public class FrameEmpleatsModificar extends javax.swing.JFrame {
         EmpleatContracteFi = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Univeylandia Parc - Atraccions");
+        setTitle("Univeylandia Parc - Treballadors - Modificar");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Treballador - Modificar");
@@ -403,46 +403,46 @@ public class FrameEmpleatsModificar extends javax.swing.JFrame {
         String emailEmpleat = SharedData.getEmailEmpleat();
         try {
             String nom = EmpleatNom.getText();
-            System.out.println(nom);
+            //System.out.println(nom);
             String cognom = EmpleatCognom.getText();
-            System.out.println(cognom);
+            //System.out.println(cognom);
             String email = EmpleatCorreu.getText();
-            System.out.println(email);
+            //System.out.println(email);
             //la puta merdad de dates
             DateFormat df = new SimpleDateFormat("yyy-MM-dd");
             
             String data_naixement = ((JTextField) EmpleatNaixement.getDateEditor().getUiComponent()).getText();
-            System.out.println(data_naixement);
+            //System.out.println(data_naixement);
             String adreca = EmpleatAdreca.getText();
-            System.out.println(adreca);
+            //System.out.println(adreca);
             String ciutat = EmpleatCiutat.getText();
-            System.out.println(ciutat);
+            //System.out.println(ciutat);
             String provincia = EmpleatProvincia.getText();
-            System.out.println(provincia);
+            //System.out.println(provincia);
             String cp = EmpleatCodiPostal.getText();
-            System.out.println(cp);
+            //System.out.println(cp);
             String numero_document = EmpleatNumeroDoc.getText();
-            System.out.println(numero_document);
+            //System.out.println(numero_document);
             //el bon combobox
             String tipus_sexe = (String) EmpleatSexe.getSelectedItem();
-            System.out.println(tipus_sexe);
+            //System.out.println(tipus_sexe);
             String telefon = EmpleatTelefon.getText();
-            System.out.println(telefon);
+            //System.out.println(telefon);
             String css = EmpleatCSS.getText();
-            System.out.println(css);
+            //System.out.println(css);
             String num_nomina = EmpleatNomina.getText();
-            System.out.println(num_nomina);
+            //System.out.println(num_nomina);
             String iban = EmpleatIBAN.getText();
-            System.out.println(iban);
+            //System.out.println(iban);
             String especialitat = EmpleatEspecialitat.getText();
-            System.out.println(especialitat);
+            //System.out.println(especialitat);
             String carrec = EmpleatCarrec.getText();
-            System.out.println(carrec);
+            //System.out.println(carrec);
             //una altra data
             String data_contracte_inici = ((JTextField) EmpleatContracteInici.getDateEditor().getUiComponent()).getText();
-            System.out.println(data_contracte_inici);
+            //System.out.println(data_contracte_inici);
             String data_contracte_fi = ((JTextField) EmpleatContracteFi.getDateEditor().getUiComponent()).getText();
-            System.out.println(data_contracte_fi);
+            //System.out.println(data_contracte_fi);
             
             String date = ((JTextField) EmpleatNaixement.getDateEditor().getUiComponent()).getText();
 

@@ -22,7 +22,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -206,7 +206,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
 
         SharedData.setNomAtraccio(atraccio);
 
-        System.out.println(atraccio);
+        //System.out.println(atraccio);
 
         FrameAtraccionsMostrar fam = new FrameAtraccionsMostrar();
         this.setVisible(false);
@@ -220,7 +220,7 @@ public class FrameAtraccionsInicial extends javax.swing.JFrame {
 
         SharedData.setNomAtraccio(atraccio);
 
-        System.out.println(atraccio);
+        //System.out.println(atraccio);
 
         FrameAtraccionsModificar famod = new FrameAtraccionsModificar();
         this.setVisible(false);

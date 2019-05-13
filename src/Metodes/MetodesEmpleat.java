@@ -57,6 +57,29 @@ public class MetodesEmpleat {
             System.out.println(rowsInserted);
 
             PreparedStatement pst2 = null;
+            PreparedStatement pst3 = null;
+            
+            int id_dadesEmpleats = 0;
+            /*Seleccionem el ID de les dades empleats*/
+            ResultSet rs2 = null;
+            try{
+                connexio = new DBConnection();
+
+                String id_dadesEmpleat = "SELECT id FROM dades_empleats ORDER BY id DESC LIMIT 1";
+
+                statement = connexio.getConnection().createStatement();
+
+                rs2 = statement.executeQuery(id_dadesEmpleat);
+
+
+                rs2.first();
+
+                /* Omplir els camps amb les dades de la query */
+                id_dadesEmpleats = (int) rs2.getInt("id");
+            }catch(SQLException e){
+                System.out.println("error en al seleccionar el id de les dades de l'empleat: ");
+            }
+            
             //crear usuari
             String sql = "INSERT INTO users (nom, cognom1, email, password, data_naixement, adreca, ciutat, provincia, codi_postal, tipus_document, numero_document, sexe, telefon, id_rol, id_dades_empleat) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -75,7 +98,7 @@ public class MetodesEmpleat {
             pst2.setString(12, emp.getSexe());
             pst2.setString(13, emp.getTelefon());
             pst2.setInt(14, emp.getId_rol());
-            pst2.setInt(15, emp.getId_dades_empleat());
+            pst2.setInt(15, id_dadesEmpleats);
             rowsInserted2 = pst2.executeUpdate();
 
             if (rowsInserted2 < 1) {
@@ -107,13 +130,7 @@ public class MetodesEmpleat {
             statement = connexio.getConnection().createStatement();
 
             rs = statement.executeQuery(rol_empleat);
-
-            /* Omplir el ComboBox amb els noms dels tipus d'atraccions */
- /*
-            while (rs.next()) {
-                typeField.addItem(rs.getString("rol"));
-            }
-             */
+            
             pst = connexio.getConnection().prepareStatement(query);
 
             pst.setString(1, EmpleatNom);
@@ -239,7 +256,34 @@ public class MetodesEmpleat {
     }
 
     public static int ElEmpleat(String email, String query) {
+        /*Busquem el id de les dades d'empleat i eliminem les dades de l'empleat*/
+        int id_dadesEmpleats = 0;
+        ResultSet rs2 = null;
+        try{
+            connexio = new DBConnection();
+
+            pst = connexio.getConnection().prepareStatement(Empleat.queryIdDadesEmpleats);
+
+            pst.setString(1, email);
+
+            rs2 = pst.executeQuery();
+            
+            
+            rs2.first();
+
+            /* Omplir els camps amb les dades de la query */
+            id_dadesEmpleats = (int) rs2.getInt("id_dades_empleat");
+            System.out.println(id_dadesEmpleats);
+            
+            connexio.disconnect();
+        }catch(SQLException e){
+            System.out.println("error en al seleccionar el id de les dades de l'empleat: " + e);
+        }
+        
+        
         int rowsInserted = 0;
+        
+        /*Eliminem l'empleat*/
         try {
             connexio = new DBConnection();
 
@@ -255,6 +299,25 @@ public class MetodesEmpleat {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
+        /*Eliminem les dades de l'empleat*/
+        try {
+            connexio = new DBConnection();
+
+            pst = connexio.getConnection().prepareStatement(Empleat.queryDelDadesEmpleats);
+
+            pst.setInt(1, id_dadesEmpleats);
+
+            rowsInserted = pst.executeUpdate();
+            connexio.disconnect();
+            pst.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        
+       
         return rowsInserted;
     }
 }

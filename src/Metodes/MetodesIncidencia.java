@@ -10,19 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.RowSorter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import Auxiliar.DBConnection;
 import Classes.Incidencia;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +29,6 @@ public class MetodesIncidencia {
         DBConnection cc = new DBConnection();
 
         Connection cn = cc.getConnection();
-        System.out.print(incidencia.getId_priority());
         String sql = "INSERT INTO `incidencies`(`titol`, `descripcio`, `id_prioritat`, `id_estat`, `id_usuari_reportador`) VALUES (?,?,?,?,10)";
 
         PreparedStatement path = null;
@@ -48,13 +37,9 @@ public class MetodesIncidencia {
 
             path = cn.prepareStatement(sql);
             path.setString(1, incidencia.getTitle());
-            System.out.println(incidencia.getTitle());
             path.setString(2, incidencia.getDescript());
-            System.out.println(incidencia.getDescript());
             path.setInt(3, incidencia.getId_priority());
-            System.out.println(incidencia.getId_priority());
             path.setInt(4, incidencia.getName_state());
-            System.out.println(incidencia.getName_state());
             //path.setInt(5, 10);
 
             path.execute();
@@ -112,7 +97,7 @@ public class MetodesIncidencia {
             result = "Incidencia actualitzada correctament" + incidencia.getId();
 
         } catch (SQLException e) {
-            System.out.println("Error al actualitzar les dades " + e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
             result = "Error al actualitzar les dades" + e.getMessage();
 
         } finally {
@@ -125,6 +110,7 @@ public class MetodesIncidencia {
 
             } catch (Exception e) {
                 result = "Error al tancar la connexió després d'actualitzar les dades" + e.getMessage();
+                JOptionPane.showMessageDialog(null,"Error: " + e);
             }
         }
         return result;
@@ -199,8 +185,7 @@ public class MetodesIncidencia {
             }
 
         } catch (SQLException e) {
-
-            System.out.println("Error al buscar l'incidència" + e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
 
         } finally {
 
@@ -211,7 +196,7 @@ public class MetodesIncidencia {
                 }
 
             } catch (Exception e) {
-                System.out.println("Error al tancar la conexió");
+                JOptionPane.showMessageDialog(null,"Error: " + e);
             }
         }
         return incidentList;
@@ -252,8 +237,7 @@ public class MetodesIncidencia {
             }
 
         } catch (SQLException e) {
-
-            System.out.println("Error al buscar l'incidència" + e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
 
         } finally {
 
@@ -264,27 +248,23 @@ public class MetodesIncidencia {
                 }
 
             } catch (Exception e) {
-                System.out.println("Error al tancar la conexió");
+                JOptionPane.showMessageDialog(null,"Error: " + e);
             }
         }
         return incidentList;
     }
     
-    public static ResultSet FillComboBox(){
+    public static ResultSet FillComboBox(String query){
         ResultSet resultat = null;
         DBConnection cc = new DBConnection();
         try{
             cc = new DBConnection();
             Statement miStatement = cc.getConnection().createStatement();
-            
-            //Crear SQL (ResultSet es un objeto en forma de "tabla" donde está 
-            //almacenada la info de la consulta
-            resultat = miStatement.executeQuery("select id,nom,cognom1,email from users where id_rol!=1");
+           
+            resultat = miStatement.executeQuery(query);
             
             
         }catch(Exception e){
-            System.out.println("Error:");
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null,"Error: " + e);
         }  
         return resultat;
@@ -302,21 +282,16 @@ public class MetodesIncidencia {
     public static int findID(String dades){
         int id = 0;
         String[] dadesArray = dades.split(" ");
-        for(int i =0; i<dadesArray.length; ++i){
-            System.out.println(dadesArray[i]);
-        }
         ResultSet resultat = null;
         try{
             DBConnection connexio = new DBConnection();
             Statement miStatement = connexio.getConnection().createStatement();
             
-            System.out.println(dadesArray[0] + " - " + dadesArray[1]);
             resultat = miStatement.executeQuery("select id from users where email = '" + dadesArray[3] + "'");
             resultat.next();
             id = resultat.getInt(1);
-            System.out.println("INT ID: " + id);
         }catch(SQLException e){
-            System.out.println("-Error: " + e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
         }
         return id;
     }

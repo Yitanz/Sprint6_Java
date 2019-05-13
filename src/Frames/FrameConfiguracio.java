@@ -42,7 +42,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
     }
 
     private void carregarGUI() throws IOException {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -57,7 +57,8 @@ public class FrameConfiguracio extends javax.swing.JFrame {
             passwordField.setText(AES.decrypt(saveFile.readLine(), secretKey));
             saveFile.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error al carregar la configuració: " + e);
+            //JOptionPane.showMessageDialog(this, "Error al carregar la configuració.");
+            //System.out.println("Error al carregar la configuració: " + e);
         }
 
     }
@@ -193,7 +194,7 @@ public class FrameConfiguracio extends javax.swing.JFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
 
-        System.out.println(currentDirectory + directoriConfig);
+        //System.out.println(currentDirectory + directoriConfig);
 
         new File(currentDirectory + directoriConfig).mkdir();
 

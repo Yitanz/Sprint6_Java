@@ -50,7 +50,10 @@ public class Empleat {
         return queryShow;
     }
     
+    /*Querys per eliminar l'empleat*/
+    public static String queryIdDadesEmpleats = "SELECT id_dades_empleat FROM users WHERE email = ?;";
     public static String queryDel = "DELETE FROM users WHERE email = ?;";
+    public static String queryDelDadesEmpleats = "DELETE FROM dades_empleats WHERE id = ?;";
     
     public static String getQueryDel(){
         return queryDel;

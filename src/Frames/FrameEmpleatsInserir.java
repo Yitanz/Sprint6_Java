@@ -23,14 +23,13 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
         EmpleatNaixement.setDateFormatString("yyy-MM-dd");
         EmpleatContracteInici.setDateFormatString("yyy-MM-dd");
         EmpleatContracteFi.setDateFormatString("yyy-MM-dd");
-
     }
 
     /**
@@ -87,7 +86,7 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         EmpleatTipusDoc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Univeylandia Parc - Atraccions");
+        setTitle("Univeylandia Parc - Treballadors - Inserir");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Treballador - Crear");
@@ -357,11 +356,11 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         emp.setId_dades_empleat(1);
         emp.setId_rol(3);
         emp.setId_horari(1);
-        
+
         String data_contracte_inici = ((JTextField) EmpleatContracteInici.getDateEditor().getUiComponent()).getText();
-        System.out.println(data_contracte_inici);
+        //System.out.println(data_contracte_inici);
         String data_contracte_fi = ((JTextField) EmpleatContracteFi.getDateEditor().getUiComponent()).getText();
-        System.out.println(data_contracte_fi);
+        //System.out.println(data_contracte_fi);
 
         String date22 = ((JTextField) EmpleatNaixement.getDateEditor().getUiComponent()).getText();
         if (EmpleatNom.getText().isEmpty() || EmpleatCorreu.getText().isEmpty() || EmpleatCognom.getText().isEmpty() || date22.isEmpty() || EmpleatAdreca.getText().isEmpty() || EmpleatCiutat.getText().isEmpty() || EmpleatProvincia.getText().isEmpty() || EmpleatCodiPostal.getText().isEmpty() || EmpleatNumeroDoc.getText().isEmpty() || EmpleatTelefon.getText().isEmpty() || EmpleatCSS.getText().isEmpty() || EmpleatNomina.getText().isEmpty() || EmpleatIBAN.getText().isEmpty() || EmpleatEspecialitat.getText().isEmpty() || EmpleatCarrec.getText().isEmpty() || data_contracte_inici.isEmpty() || data_contracte_fi.isEmpty()) {

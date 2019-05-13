@@ -27,7 +27,7 @@ public class FrameClientsInicial extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -211,7 +211,7 @@ public class FrameClientsInicial extends javax.swing.JFrame {
 
         SharedData.setClientNumeroDocument(client);
 
-        System.out.println(client);
+        //System.out.println(client);
 
         FrameClientMostrar famo = new FrameClientMostrar();
         this.setVisible(false);
@@ -226,7 +226,7 @@ public class FrameClientsInicial extends javax.swing.JFrame {
 
         SharedData.setClientNumeroDocument(client);
 
-        System.out.println(client);
+        //System.out.println(client);
 
         FrameClientModificar famos = new FrameClientModificar();
         this.setVisible(false);

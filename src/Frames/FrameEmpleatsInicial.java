@@ -22,15 +22,15 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
         resultTable.setDefaultEditor(Object.class, null);
         carregarTaula();
     }
-    
-        private void carregarTaula() {
+
+    private void carregarTaula() {
         /* Per defecte desactivar els botons */
         showBtn.setEnabled(false);
         editBtn.setEnabled(false);
@@ -59,6 +59,7 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
         deleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Univeylandia Parc - Treballadors");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Treballadors");
@@ -197,7 +198,7 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
 
         SharedData.setEmailEmpleat(email);
 
-        System.out.println(email);
+        //System.out.println(email);
 
         FrameEmpleatsMostrar fam = new FrameEmpleatsMostrar();
         this.setVisible(false);
@@ -214,7 +215,7 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
 
         SharedData.setEmailEmpleat(email);
 
-        System.out.println(email);
+        //System.out.println(email);
 
         FrameEmpleatsModificar fi = new FrameEmpleatsModificar();
         this.setVisible(false);
@@ -228,24 +229,18 @@ public class FrameEmpleatsInicial extends javax.swing.JFrame {
         int fila = resultTable.getSelectedRow();
 
         String email = resultTable.getModel().getValueAt(fila, columna).toString();
-        //String codiss = resultTable.getModel().getValueAt(fila, columna).toString();
 
-        
         int input = JOptionPane.showConfirmDialog(null,
                 "Estàs segur de voler eliminar el registre: " + email + "?", "Eliminar atracció", JOptionPane.OK_CANCEL_OPTION);
 
         if (input == 0) {
             int rowsInserted = MetodesEmpleat.ElEmpleat(email, Empleat.getQueryDel());
-          //  int rowsInserted2 = MetodesEmpleat.ElEmpleat(email, Empleat.queryDadesEmp());
-
-            
 
             if (rowsInserted > 0) {
                 JOptionPane.showMessageDialog(this, "S'ha eliminat el registre: " + email);
                 carregarTaula();
             }
-        }        
-        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void resultTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTableMouseClicked

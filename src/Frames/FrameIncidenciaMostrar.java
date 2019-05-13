@@ -22,7 +22,7 @@ public class FrameIncidenciaMostrar extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -59,10 +59,10 @@ public class FrameIncidenciaMostrar extends javax.swing.JFrame {
         submitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Univeylandia Parc - Atraccions");
+        setTitle("Univeylandia Parc - Incidencies - Mostrar");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
-        jLabel1.setText("incidències - Mostrar");
+        jLabel1.setText("Incidències - Mostrar");
 
         jLabel2.setText("Nom atracció");
 

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,14 +53,16 @@ public class MetodesAtraccio {
                 JOptionPane.showMessageDialog(this, "S'ha inserit un nou registre!");
             }*/
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error.");
         } finally {
             try {
                 /* Tancar connexió i statement */
                 connexio.disconnect();
                 pst.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null,"Error.");
             }
         }
         return rowsInserted;
@@ -90,7 +93,8 @@ public class MetodesAtraccio {
             statement.close();
             resultSet.close();*/
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error.");
         }
     }
 
@@ -103,7 +107,7 @@ public class MetodesAtraccio {
      * @return atr
      */
     public static Atraccio getDadesAtraccio(String nomAtraccio, JComboBox typeField, String query) {
-        System.out.println(nomAtraccio);
+        //System.out.println(nomAtraccio);
         Atraccio atr = null;
         try {
             connexio = new DBConnection();
@@ -146,8 +150,8 @@ public class MetodesAtraccio {
             resultSet2.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            //JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error.");
         }
         return atr;
     }
@@ -182,14 +186,16 @@ public class MetodesAtraccio {
             rowsInserted = pst.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error.");
         } finally {
             try {
                 /* Tancar connexió i statement */
                 connexio.disconnect();
                 pst.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null,"Error.");
             }
         }
         return rowsInserted;
@@ -217,8 +223,8 @@ public class MetodesAtraccio {
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            //JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error.");
         }
         return rowsInserted;
     }

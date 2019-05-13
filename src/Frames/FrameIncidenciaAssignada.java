@@ -6,13 +6,9 @@
 package Frames;
 
 import Auxiliar.MetodesGenerals;
-import java.util.ArrayList;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
 import Metodes.MetodesIncidencia;
-import Classes.Incidencia;
 import javax.swing.JOptionPane;
-import Frames.FrameAtraccionsModificar;
 
 /**
  *
@@ -30,7 +26,7 @@ public class FrameIncidenciaAssignada extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -57,6 +53,7 @@ public class FrameIncidenciaAssignada extends javax.swing.JFrame {
         incidentUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Univeylandia Parc - Incidencies - Assignades");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Incidències - assignades");
@@ -193,7 +190,7 @@ public class FrameIncidenciaAssignada extends javax.swing.JFrame {
                 id_prioritat = incidentTable.getValueAt(filaseleccionada, 3).toString();
                 id_estat = incidentTable.getValueAt(filaseleccionada, 4).toString();
                 String user_assignat = incidentTable.getValueAt(filaseleccionada, 5).toString() + " " + incidentTable.getValueAt(filaseleccionada, 6).toString() + " - " + incidentTable.getValueAt(filaseleccionada,7).toString();
-                System.out.println(user_assignat);
+                //System.out.println(user_assignat);
 
                 FrameIncidenciaModificar fi = new FrameIncidenciaModificar(id, titol, descripcio, id_prioritat, id_estat, user_assignat);
                 this.setVisible(false);

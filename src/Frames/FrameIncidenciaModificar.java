@@ -7,7 +7,6 @@ package Frames;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import Classes.Incidencia;
 import Metodes.MetodesIncidencia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +25,7 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
     private String descripcio;
     private String id_prioritat;
     private String id_estat;
-    private ResultSet empleats = MetodesIncidencia.FillComboBox();
+    private ResultSet empleats = MetodesIncidencia.FillComboBox("select id,nom,cognom1,email from users where id_rol!=1 and id_rol!=2");
 
     public FrameIncidenciaModificar() {
         initComponents();
@@ -53,9 +52,10 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
                 EmpleatsCB.addItem(empleats.getNString("nom") + " " + empleats.getNString("cognom1") + " - " + empleats.getNString("email"));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
         }
-
+        prioritatCombo.setSelectedItem(id_prioritat);
+        estatCombo.setSelectedItem(id_estat);
     }
     
     public FrameIncidenciaModificar(String id, String titol, String descripcio, String id_prioritat, String id_estat, String usuari_assignat) {
@@ -78,14 +78,16 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
                 EmpleatsCB.addItem(empleats.getNString("nom") + " " + empleats.getNString("cognom1") + " - " + empleats.getNString("email"));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
         }
+        prioritatCombo.setSelectedItem(id_prioritat);
+        estatCombo.setSelectedItem(id_estat);
         EmpleatsCB.setSelectedItem(usuari_assignat);
 
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -116,7 +118,7 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
         EmpleatsCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Univeylandia Parc - Atraccions");
+        setTitle("Univeylandia Parc - Incidencies - Modificar");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -326,7 +328,7 @@ public class FrameIncidenciaModificar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Incidència no modificada", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Error: " + e);
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 

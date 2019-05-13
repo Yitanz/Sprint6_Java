@@ -6,13 +6,9 @@
 package Frames;
 
 import Auxiliar.MetodesGenerals;
-import java.util.ArrayList;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
 import Metodes.MetodesIncidencia;
-import Classes.Incidencia;
 import javax.swing.JOptionPane;
-import Frames.FrameAtraccionsModificar;
 
 /**
  *
@@ -30,7 +26,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
     }
 
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
@@ -58,6 +54,7 @@ public class FrameIncidenciaInicial extends javax.swing.JFrame {
         incidentDelete1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Univeylandia Parc - Incidencies");
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setText("Incidències");

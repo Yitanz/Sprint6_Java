@@ -33,7 +33,7 @@ public class FrameAtraccionsMostrar extends javax.swing.JFrame {
      * @author Evaldas Casas
      */
     private void carregarGUI() {
-        this.setSize(450, 350);
+        this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
         this.setContentPane(pane);
         this.setLocationRelativeTo(null);
