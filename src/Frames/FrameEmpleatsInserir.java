@@ -129,7 +129,7 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
 
         jLabel12.setText("Sexe");
 
-        EmpleatSexe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Home", "Done" }));
+        EmpleatSexe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Home", "Dona" }));
 
         jLabel13.setText("Telèfon");
 

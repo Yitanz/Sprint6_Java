@@ -191,7 +191,10 @@ public class FrameInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_incidenciesBtnActionPerformed
 
     private void tiquetsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiquetsBtnActionPerformed
-        // TODO add your handling code here:
+        FrameTicketsInicial fti = new FrameTicketsInicial();
+        this.setVisible(false);
+        fti.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_tiquetsBtnActionPerformed
 
     private void clientsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsBtnActionPerformed

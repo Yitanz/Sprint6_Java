@@ -24,7 +24,7 @@ public class FrameClientInserir extends javax.swing.JFrame {
         carregarGUI();
         clientdata.setDateFormatString(MetodesGenerals.DATE_FORMAT);
     }
-    
+
     private void carregarGUI() {
         this.setSize(500, 400);
         JScrollPane pane = new JScrollPane(this.getContentPane());
@@ -266,6 +266,9 @@ public class FrameClientInserir extends javax.swing.JFrame {
         users.setEmail(clientemail.getText());
         users.setPassword(clientpassword.getText());
         users.setData_naixement(((JTextField) clientdata.getDateEditor().getUiComponent()).getText());
+        
+        String data = ((JTextField) clientdata.getDateEditor().getUiComponent()).getText();
+        
         users.setAdreca(clientadreca.getText());
         users.setCiutat(clientciutat.getText());
         users.setProvincia(clientprovincia.getText());
@@ -276,31 +279,41 @@ public class FrameClientInserir extends javax.swing.JFrame {
         users.setTelefon(clienttelefon.getText());
         users.setId_rol(1);
 
-        try {
-            MetodesClient.registrarClient(users);                                   //Cridar al metode registrar client i passar el users
-            JOptionPane.showMessageDialog(this, "S'ha registrat el client!");
-        } catch (SQLException ex) {
-            Logger.getLogger(FrameClientInserir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (clientnom.getText().isEmpty() || clientcognom1.getText().isEmpty() || clientcognom2.getText().isEmpty()
+                || clientemail.getText().isEmpty() || data.isEmpty() || clientpassword.getText().isEmpty() || clientadreca.getText().isEmpty()
+                || clientciutat.getText().isEmpty() || clientprovincia.getText().isEmpty() || clientcodi.getText().isEmpty()
+                || clienttipus.getText().isEmpty() || clientnumero.getText().isEmpty() || clientsexe.getText().isEmpty()
+                || clienttelefon.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error. Revisa les dades introduides.");
+        } else {
 
-        clientnom.setText("");                                                  //Buidar tots els camps per nova operacio
-        clientcognom1.setText("");
-        clientcognom2.setText("");
-        clientemail.setText("");
-        clientpassword.setText("");
-        clientadreca.setText("");
-        clientciutat.setText("");
-        clientprovincia.setText("");
-        clientcodi.setText("");
-        clienttipus.setText("");
-        clientnumero.setText("");
-        clientsexe.setText("");
-        clienttelefon.setText("");
+            try {
+                MetodesClient.registrarClient(users);                                   //Cridar al metode registrar client i passar el users
+                JOptionPane.showMessageDialog(this, "S'ha registrat el client!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error:" + ex);
+                Logger.getLogger(FrameClientInserir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            clientnom.setText("");                                                  //Buidar tots els camps per nova operacio
+            clientcognom1.setText("");
+            clientcognom2.setText("");
+            clientemail.setText("");
+            clientpassword.setText("");
+            clientadreca.setText("");
+            clientciutat.setText("");
+            clientprovincia.setText("");
+            clientcodi.setText("");
+            clienttipus.setText("");
+            clientnumero.setText("");
+            clientsexe.setText("");
+            clienttelefon.setText("");
+        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void testbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testbtnActionPerformed
-         // TODO add your handling code here:
-         clientnom.setText("Ferran");                                                //Dades prefabricades per agilitzar el proces
+        // TODO add your handling code here:
+        clientnom.setText("Ferran");                                                //Dades prefabricades per agilitzar el proces
         clientcognom1.setText("Climent");
         clientcognom2.setText("Vidal");
         clientemail.setText("ferran@climent.com");
@@ -343,7 +356,6 @@ public class FrameClientInserir extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

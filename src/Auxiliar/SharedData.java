@@ -10,6 +10,7 @@ public class SharedData {
     private static String clientNumeroDocument;
     private static String emailEmpleat;
     private static String codiSS;
+private static String idTicket;
 
     public static void setNomAtraccio(String x) {
         SharedData.nomAtraccio = x;
@@ -41,5 +42,13 @@ public class SharedData {
 
     public static void setCodiSS(String codiSS) {
         SharedData.codiSS = codiSS;
+    }
+
+    public static String getIdTicket() {
+        return idTicket;
+    }
+
+    public static void setIdTicket(String x) {
+        SharedData.idTicket = x;
     }
 }
