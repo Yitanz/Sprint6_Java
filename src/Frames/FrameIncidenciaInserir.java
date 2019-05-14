@@ -168,146 +168,148 @@ public class FrameIncidenciaInserir extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Introdueix dades per a poder modificar l'incidencia", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
 
-            if (descripcio.isEmpty()) {
+            else if (descripcio.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Introdueix dades per a poder modificar l'incidencia", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
+            else{
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(this, "Estas segur que vols introduir l'incidència", "Confirma per a inserir l'incidència", dialogButton);
+                if (dialogResult == 0) {
 
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this, "Estas segur que vols introduir l'incidència", "Confirma per a inserir l'incidència", dialogButton);
-            if (dialogResult == 0) {
+                    if (prioritat == "Urgent") {
+                        int idUsuari = 1;
 
-                if (prioritat == "Urgent") {
-                    int idUsuari = 1;
+                        if (estat == "To-do") {
+                            int priority = 3;
+                            int state = 1;
 
-                    if (estat == "To-do") {
-                        int priority = 3;
-                        int state = 1;
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
 
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
 
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
+                        }
+                        else if (estat == "In progress") {
+                            int priority = 3;
+                            int state = 2;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+
+                        }
+                        else if (estat == "Done") {
+                            int priority = 3;
+                            int state = 3;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+                        }
+                    }
+
+                    else if (prioritat == "Normal") {
+                        if (estat == "To-do") {
+                            int priority = 2;
+                            int state = 1;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+                        }
+                        else if (estat == "In progress") {
+                            int priority = 2;
+                            int state = 2;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+
+                        }
+                        else if (estat == "Done") {
+                            int priority = 2;
+                            int state = 3;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+
+                        }
 
                     }
-                    if (estat == "In progress") {
-                        int priority = 3;
-                        int state = 2;
+                    else if (prioritat == "Baixa") {
+                        if (estat == "To-do") {
+                            int priority = 1;
+                            int state = 1;
 
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");;
 
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
 
+                        }
+                        else if (estat == "In progress") {
+                            int priority = 1;
+                            int state = 2;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+                        }
+                        else if (estat == "Done") {
+                            int priority = 1;
+                            int state = 3;
+
+                            Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
+                            MetodesIncidencia.registerIncident(insertIncident);
+                            JOptionPane.showMessageDialog(null, "Incidència creada correctament");
+
+                            FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
+                            this.setVisible(false);
+                            fai.setVisible(true);
+                            this.dispose();
+                        }
                     }
-                    if (estat == "Done") {
-                        int priority = 3;
-                        int state = 3;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incidència no inserida", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
-
-                if (prioritat == "Normal") {
-                    if (estat == "To-do") {
-                        int priority = 2;
-                        int state = 1;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                    if (estat == "In progress") {
-                        int priority = 2;
-                        int state = 2;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "Done") {
-                        int priority = 2;
-                        int state = 3;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-
-                }
-                if (prioritat == "Baixa") {
-                    if (estat == "To-do") {
-                        int priority = 1;
-                        int state = 1;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");;
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-
-                    }
-                    if (estat == "In progress") {
-                        int priority = 1;
-                        int state = 2;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                    if (estat == "Done") {
-                        int priority = 1;
-                        int state = 3;
-
-                        Incidencia insertIncident = new Incidencia(titol, descripcio, state, priority);
-                        MetodesIncidencia.registerIncident(insertIncident);
-                        JOptionPane.showMessageDialog(null, "Incidència creada correctament");
-
-                        FrameIncidenciaInicial fai = new FrameIncidenciaInicial();
-                        this.setVisible(false);
-                        fai.setVisible(true);
-                        this.dispose();
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Incidència no modificada", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
+            
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, "Error: " + e, "Advertencia", JOptionPane.WARNING_MESSAGE);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_submitBtnActionPerformed
 
