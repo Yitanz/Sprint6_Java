@@ -33,7 +33,7 @@ public class MetodesAtraccio {
             connexio = new DBConnection();
 
             String query = "INSERT INTO atraccions (nom_atraccio, tipus_atraccio, data_inauguracio, altura_min, "
-                    + "altura_max, accessibilitat, acces_express, descripcio, path) VALUES (?,?,?,?,?,?,?,?,?)";
+                    + "altura_max, accessibilitat, acces_express, descripcio) VALUES (?,?,?,?,?,?,?,?)";
 
             pst = connexio.getConnection().prepareStatement(query);
 
@@ -45,7 +45,7 @@ public class MetodesAtraccio {
             pst.setString(6, atr.isAccessibilitat());
             pst.setString(7, atr.isAcces_expres());
             pst.setString(8, atr.getDescripcio());
-            pst.setString(9, "NO");
+            //pst.setString(9, "NO");
 
             rowsInserted = pst.executeUpdate();
 
