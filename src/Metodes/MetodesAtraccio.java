@@ -160,6 +160,7 @@ public class MetodesAtraccio {
      * Mètode que rep un objecte Atracció i realitza un INSERT en la taula
      * Atraccions amb les dades de l'objecte. Retorna un enter.
      *
+     * @param nomAtraccio
      * @param atr
      * @return rowsInserted
      */
@@ -205,6 +206,8 @@ public class MetodesAtraccio {
      * Mètode que elimina una atracció de la taula Atraccions.
      *
      * @param nomAtraccio
+     * @param query
+     * @return rowsInserted
      */
     public static int EliminarAtraccio(String nomAtraccio, String query) {
         int rowsInserted = 0;
