@@ -393,9 +393,9 @@ public class FrameEmpleatsInserir extends javax.swing.JFrame {
         EmpleatTelefon.setText("998999998");
         EmpleatCSS.setText("455454545");
         EmpleatNomina.setText("5454");
-        EmpleatIBAN.setText("2");
-        EmpleatEspecialitat.setText("testet");
-        EmpleatCarrec.setText("testet");
+        EmpleatIBAN.setText("286758765");
+        EmpleatEspecialitat.setText("IT");
+        EmpleatCarrec.setText("dada");
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -103,6 +103,8 @@ public class MetodesEmpleat {
 
             if (rowsInserted2 < 1) {
                 JOptionPane.showMessageDialog(null, "S'ha produit un error");
+                
+                eliminarDadesEmpleat(id_dadesEmpleats);
             }
 
             result = "Empleat registrat amb exit";
@@ -319,5 +321,25 @@ public class MetodesEmpleat {
         
        
         return rowsInserted;
+    }
+    
+    public static void eliminarDadesEmpleat(int idDadesEmpleat){
+        ResultSet rs = null;
+
+        /*Eliminem les dades de l'empleat*/
+        try {
+            connexio = new DBConnection();
+
+            pst = connexio.getConnection().prepareStatement("DELETE FROM `dades_empleats` WHERE id = ?");
+
+            pst.setInt(1, idDadesEmpleat);
+
+            pst.executeUpdate();
+            connexio.disconnect();
+            pst.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }
